@@ -1,0 +1,26 @@
+@keyframes fly {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: calc(100vw * 2) 0;
+  }
+}
+
+.loading {
+  padding: 20px;
+  background-color: #fafafa;
+  border-radius: 10px;
+  .loading-bar {
+    height: 100%;
+    min-height: 20px;
+    margin: 4px;
+    width: 100%;
+    background-image: radial-gradient(circle, #dbdbdb, #f2f2f2);
+    animation: fly 5s linear infinite;
+    border-radius: 6px;
+    &:first-child {
+      margin-top: 0 !important;
+    }
+  }
+}
