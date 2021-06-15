@@ -23,14 +23,6 @@ and a form to submit review details.
 - Cart page displays all books that have been added and show the total amount of them.
 - About page provides essential information about the Bookworm Company.
 
-Demo
------
-  - Frontend: https://nus-react-demo-frontend.herokuapp.com/
-  - Backend API Specification: https://nus-react-demo-backend.herokuapp.com/api_docs/swagger_docs/v1
-  - Backend API Endpoint: https://nus-react-demo-backend.herokuapp.com/v1
-  - Backend API Postman JSON: https://nus-react-demo-backend.herokuapp.com/react_workshop.postman_collection.json
-  - Follow: https://www.bookwormsonline.co.uk/index.php?route=common/home
-
 Authentication
 -----
 Request to API to get or create, update and receive an **api_key** in response.
