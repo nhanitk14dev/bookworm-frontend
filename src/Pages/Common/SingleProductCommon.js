@@ -19,7 +19,7 @@ class SingleProductCommon extends PureComponent {
 		  </div>
 		  <div className="info">
 		    <h2><Link href="single-product.html">{product ? product.title : 'N/A'}</Link></h2>
-		    <p>{product && product.author ? product.author : 'N/A'}</p>
+		    <div>{product && product.author ? product.author : null}</div>
 		    <div className="product-carousel-price">
 		        <ins>${product ? product.price : 0}</ins> <del>{product ? product.discount_price : null}</del>
 		    </div> 

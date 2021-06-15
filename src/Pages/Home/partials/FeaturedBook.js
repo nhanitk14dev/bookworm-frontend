@@ -9,7 +9,7 @@ import SingleProductCommon from '../../Common/SingleProductCommon';
 const product = {
   imgSrc: images,
   title: 'Book Cartoon Tom&Jerry',
-  price: '$650.00'
+  price: '650.00'
 };
 
 class FeaturedBook extends Component {
