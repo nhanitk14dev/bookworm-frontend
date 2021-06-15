@@ -41,8 +41,12 @@ export const en = {
   'alert.register_fail': 'Register failed.',
   'home.title': 'Welcome to Bookworm Online Site',
   'home.desc': 'This is a online Bookworm website, you can search book in various conditions such as author or category',
+  'on_sale': 'On Sale',
+  'featured_books': 'Featured Books',
   'gender.male': 'Male',
   'gender.female': 'Female',
   'lang.en': 'English',
   'lang.vi': 'VietNam',
+  'product.recommended': 'Recommended',
+  'product.popular': 'Popular'
 }

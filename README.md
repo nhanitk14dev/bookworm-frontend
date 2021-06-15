@@ -29,6 +29,7 @@ Demo
   - Backend API Specification: https://nus-react-demo-backend.herokuapp.com/api_docs/swagger_docs/v1
   - Backend API Endpoint: https://nus-react-demo-backend.herokuapp.com/v1
   - Backend API Postman JSON: https://nus-react-demo-backend.herokuapp.com/react_workshop.postman_collection.json
+  - Follow: https://www.bookwormsonline.co.uk/index.php?route=common/home
 
 Authentication
 -----
@@ -57,7 +58,8 @@ Learn React
 
 7. [https://facebook.github.io/create-react-app/docs/
 code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
+8. Package:
+   -  Translate: [https://github.com/APSL/redux-i18n]
 ## Installation
    - Using [Create React App](https://github.com/facebook/create-react-app) or https://create-react-app.dev/docs/getting-started to create new React App.
    - React Redux: https://react-redux.js.org/introduction/getting-started

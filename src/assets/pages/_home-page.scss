@@ -1,4 +1,7 @@
-.home-page {
-    width: 100%;
-    background-color: $text-color-yellow;
+.home {
+  width: 100%;
+  .featured-book {
+    margin-bottom: 15px;
+  }
 }
+
