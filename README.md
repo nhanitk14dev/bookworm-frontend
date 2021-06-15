@@ -27,8 +27,6 @@ Authentication
 -----
 Request to API to get or create, update and receive an **api_key** in response.
 
-+ spec: https://nus-react-demo-backend.herokuapp.com/api_docs/swagger_docs/v1#!/Companies/post_v1_companies
-
 Attach **api_key** in **header** per later request to pass authentication, API will rely on this information to define `current_company`.
 
 
