@@ -24,9 +24,15 @@
 
 body {
   color: $text-color-black;
-
+  .container {
+    padding: 0;
+  }
   .row {
     margin: 15px -15px;
+  }
+
+  img {
+    width: 100%;
   }
 }
 
@@ -46,4 +52,3 @@ body {
 a {
   color: $text-color-light-blue;
 }
-
