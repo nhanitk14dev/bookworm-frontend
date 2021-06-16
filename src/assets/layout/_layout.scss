@@ -4,29 +4,18 @@
   font-family: 'Nunito', sans-serif;
 }
 
-.modal-confirm {
-  margin: 0;
-
-  .modal-content {
-    height: 100vh;
-    border: none;
-    border-radius: inherit;
-
-    .modal-body {
-      .modal-detail {
-        border: 1px solid;
-        border-radius: 15px;
-        height: 80vh;
-      }
-    }
-  }
-}
-
 body {
   color: $text-color-black;
+
+  .title-b {
+    font-weight: 700;
+    font-size: 28px;
+  }
+
   .container {
     padding: 0;
   }
+
   .row {
     margin: 15px -15px;
   }
@@ -34,21 +23,30 @@ body {
   img {
     width: 100%;
   }
-}
 
-.header {
-  .app-logo {
-    width: 32px;
-    height: 32px;
+  .header {
+    .app-logo {
+      width: 32px;
+      height: 32px;
+    }
+
+    .navbar-nav {
+      display: flex;
+      width: 100%;
+      justify-content: flex-end;
+    }
   }
 
-  .navbar-nav {
-    display: flex;
-    width: 100%;
-    justify-content: flex-end;
+  a {
+    color: $text-color-light-blue;
   }
-}
 
-a {
-  color: $text-color-light-blue;
+  @media (max-width: $tablet-width) {
+    .col-lg-12,
+    .col-md-12,
+    .col-sm-12,
+    .col-xs-12 {
+      margin: 15px 0;
+    }
+  }
 }

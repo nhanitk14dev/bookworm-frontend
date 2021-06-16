@@ -102,3 +102,37 @@
     }
   }
 }
+
+#product-details-page {
+  .product-info {
+
+    padding-bottom: 15px;
+
+    .content {
+      padding: 15px;
+    }
+
+    @media (min-width: $tablet-width) {
+      display: flex;
+      border: 1px solid $div-background-light-gray;
+
+      .wrap-image {
+        width: 40%;
+        padding: 0;
+        text-align: center;
+      }
+
+      .content {
+        width: 50%;
+      }
+    }
+  }
+
+  .add-cart {
+    .price {
+      font-weight: 700;
+      font-size: 30px;
+      margin-left: 5px;
+    }
+  }
+}

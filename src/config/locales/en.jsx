@@ -50,5 +50,7 @@ export const en = {
   'lang.vi': 'VietNam',
   'product.recommended': 'Recommended',
   'product.popular': 'Popular',
+  'product.customer_reviews': 'Customer Reviews',
+  'product.write_reviews': 'Write a Review',
   'see_detail': 'See Detail'
 }
