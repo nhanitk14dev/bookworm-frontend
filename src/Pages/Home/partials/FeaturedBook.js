@@ -1,10 +1,8 @@
-import { Component, Fragment, PureComponent } from "react";
-import _ from 'lodash';
-import { Link } from 'react-router-dom';
-import { Nav, Row, Col, Container } from 'react-bootstrap'
+import { Component } from "react";
+import { Nav, Row, Col } from 'react-bootstrap'
 import PropTypes from 'prop-types';
 import images from '../../../assets/images/products/product3-250x250.jpg';
-import SingleProductCommon from '../../Common/SingleProductCommon'; 
+import SingleProductCommon from '../../Common/SingleProductCommon';
 
 const product = {
   imgSrc: images,

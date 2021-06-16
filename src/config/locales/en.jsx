@@ -1,4 +1,3 @@
-import React from 'react'
 export const en = {
   submit: 'Submit',
   actions: 'Actions',
@@ -25,8 +24,10 @@ export const en = {
   logout: 'Log Out',
   'model.shop': 'shop',
   'model.user': 'user',
-  'header.shop': 'Shop',
-  'header.home': 'Home',
+  'page.shop': 'Shop',
+  'page.home': 'Home',
+  'page.about': 'About',
+  'page.cart': 'Cart',
   'alert.create_success': 'The {model} was created sucessfully.',
   'alert.create_fail': 'The {model} has not been created yet.',
   'alert.update_success': 'The {model} was updated sucessfully.',
@@ -48,5 +49,6 @@ export const en = {
   'lang.en': 'English',
   'lang.vi': 'VietNam',
   'product.recommended': 'Recommended',
-  'product.popular': 'Popular'
+  'product.popular': 'Popular',
+  'see_detail': 'See Detail'
 }

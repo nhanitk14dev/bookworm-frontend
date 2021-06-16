@@ -1,4 +1,3 @@
-import React from 'react'
 export const vi = {
   signin: 'Đăng Nhập',
   signup: 'Đăng Kí',

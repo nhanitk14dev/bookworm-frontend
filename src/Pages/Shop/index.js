@@ -1,8 +1,6 @@
 import { Component, Fragment } from "react";
 import PropTypes from 'prop-types';
-import { Nav, Row, Col, Form, Button, Jumbotron, Dropdown, DropdownButton } from 'react-bootstrap';
-import _ from 'lodash';
-import { Link } from 'react-router-dom';
+import { Row, Col, Form, Dropdown, DropdownButton } from 'react-bootstrap';
 import images from '../../assets/images/products/product3-250x250.jpg';
 import SingleProductCommon from '../Common/SingleProductCommon';
 import ReactPaginate from 'react-paginate';

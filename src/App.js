@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
-import Loader from "react-loaders";
 import configureStore from "./config/store";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Routes  from './config/routes';
-
 import I18n from "redux-i18n"
 import {translations} from "./config/translations"
 

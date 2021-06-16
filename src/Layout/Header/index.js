@@ -1,15 +1,10 @@
 import React, { Component } from 'react'
 import {
-  Spinner,
-  Button,
-  ButtonToolbar,
-  NavDropdown,
   Navbar,
   Nav
 } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 import logo from '../../assets/images/logo.svg'
-import { Form } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
@@ -37,25 +32,25 @@ class CHeader extends Component {
       <Navbar.Text className='mr-3'>
         <NavLink
           to='/'>
-          Home
+          {t('page.home')}
         </NavLink>
       </Navbar.Text>
       <Navbar.Text className='mr-3'>
         <NavLink
           to='/shop'>
-          Shop
+          {t('page.shop')}
         </NavLink>
       </Navbar.Text>
       <Navbar.Text className='mr-3'>
         <NavLink
           to='/about'>
-          About
+          {t('page.about')}
         </NavLink>
       </Navbar.Text>
       <Navbar.Text className='mr-3'>
         <NavLink
           to='/cart'>
-          Cart (0)
+          {t('page.cart')} (0)
         </NavLink>
       </Navbar.Text>
     </Nav>
