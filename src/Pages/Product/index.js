@@ -36,7 +36,7 @@ class Product extends Component {
           <Row>
             <Col lg={7} md={12}>
               <div className="product-info">
-                <div className="wrap-image">
+                <div className="product-f-image">
                   <img src={images1} alt="placeholder" className="img-thumbnail"/>
                   <div className="mt-2 text-center">By (author) <strong>Nhan David</strong></div>
                 </div>
