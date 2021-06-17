@@ -1,3 +1,13 @@
+//common product
+.product-f-image {
+  position: relative;
+  padding: 5px;
+
+  img {
+    width: 100%;
+  }
+}
+
 .single-product {
   border: 1px solid $div-background-light-gray;
   overflow: hidden;
@@ -15,15 +25,6 @@
     font-weight: 700;
     margin-right: 5px;
     text-decoration: none;
-  }
-
-  .product-f-image {
-    position: relative;
-    padding: 5px;
-
-    img {
-      width: 100%;
-    }
   }
 
   .info {
@@ -105,6 +106,10 @@
       left: 0
     }
   }
+
+  @media (max-width: $mobile-width) {
+    margin: 15px 0;
+  }
 }
 
 #product-details-page {
@@ -124,10 +129,6 @@
         width: 40%;
         padding: 0;
         text-align: center;
-
-        img {
-          width: 100%;
-        }
       }
 
       .content {
