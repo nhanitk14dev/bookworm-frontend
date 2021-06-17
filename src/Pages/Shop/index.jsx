@@ -1,6 +1,6 @@
 import { Component, Fragment } from "react";
 import PropTypes from 'prop-types';
-import { Row, Col, Form, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Row, Col, Form, Dropdown, DropdownButton, Pagination } from 'react-bootstrap';
 import images from '../../assets/images/products/product3-250x250.jpg';
 import SingleProductCommon from '../Common/SingleProductCommon';
 import ReactPaginate from 'react-paginate';
@@ -38,6 +38,20 @@ class Shop extends Component {
     }
 
     return html;
+  }
+
+  renderPagination = () => {
+    return (
+      <Pagination>
+      <Pagination.First />
+      <Pagination.Prev />
+      <Pagination.Item>{1}</Pagination.Item>
+      <Pagination.Item active>{2}</Pagination.Item>
+      <Pagination.Item>{3}</Pagination.Item>
+      <Pagination.Next />
+      <Pagination.Last />
+    </Pagination>
+    );
   }
 
   render() {
@@ -91,6 +105,12 @@ class Shop extends Component {
               </div>
               
               {this.renderProductsWithPaging()}
+
+              <Row>
+                <Col md={{ span: 6, offset: 3 }}>
+                  {this.renderPagination()}
+                </Col>
+              </Row>
             </Col>
           </Row>
         </div>

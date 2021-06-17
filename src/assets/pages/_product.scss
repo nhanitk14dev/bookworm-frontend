@@ -58,14 +58,14 @@
       color: #fff;
       display: block;
       font-size: 16px;
-      left: 10%;
+      left: 45%;
       margin: 0;
       padding: 10px;
       position: absolute;
       text-align: center;
       text-transform: uppercase;
       border: 1px solid #5a88ca;
-      width: 80%;
+      width: 50px;
       z-index: 99;
       transition: .4s;
 
@@ -81,11 +81,11 @@
     }
 
     .add-to-cart-link {
-      top: -25%;
+      top: -35%;
     }
 
     .view-details-link {
-      bottom: -25%;
+      bottom: -35%;
     }
 
     &:hover {
@@ -94,12 +94,23 @@
   }
 
   &:hover {
+
     .add-to-cart-link {
-      top: 25%;
+      top: 20%;
     }
 
     .view-details-link {
-      bottom: 25%;
+      bottom: 20%;
+    }
+
+    @media (max-width: $mobile-width) {
+      .add-to-cart-link {
+        top: 30%;
+      }
+
+      .view-details-link {
+        bottom: 30%;
+      }
     }
 
     .product-hover:after {

@@ -36,9 +36,11 @@ class OnSale extends Component {
           <div className="product-f-image">
             <img src={item.img} alt="item" className="item"/>
             <div className="product-hover">
-              <Link to="/" className="add-to-cart-link"><i className="fa fa-shopping-cart"></i> Add to cart</Link>
+              <Link to="/" className="add-to-cart-link">
+                <i className="fa fa-shopping-cart"></i>
+              </Link>
               <Link className="view-details-link" to="/product/book-tom-and-jerry" target="_blank" rel="noopener noreferrer">
-                <i className="fa fa-link"></i> See details
+                <i className="fa fa-eye"></i>
               </Link>
             </div>
           </div>

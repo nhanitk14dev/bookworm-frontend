@@ -1,14 +1,14 @@
 .shop-page {
+  .sidebar-filter {
+    width: 100%;
+    padding: 20px 10px;
+  }
+
   .toolbar-sort {
     display: block;
     height: auto;
     width: 100%;
-    margin: 10px 0;
     padding: 20px 10px;
-
-    .sidebar-filter {
-      padding: 5px;
-    }
 
     @media (min-width: $tablet-width) {
       .group-sort {

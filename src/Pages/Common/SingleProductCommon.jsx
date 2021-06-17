@@ -14,9 +14,11 @@ class SingleProductCommon extends PureComponent {
 		  <div className="product-f-image">
 		    <img src={ srcImg } alt="item" className="item"/>
 		    <div className="product-hover">
-		      <Link to="/" className="add-to-cart-link"><i className="fa fa-shopping-cart"></i> Add to cart</Link>
+		      <Link to="/" className="add-to-cart-link">
+		      	<i className="fa fa-shopping-cart"></i>
+		      </Link>
 		      <Link className="view-details-link" to="/product/book-tom-and-jerry" target="_blank" rel="noopener noreferrer">
-		      	<i className="fa fa-link"></i> {t('see_detail')}
+		      	<i className="fa fa-eye"></i>
 		      </Link>
 		    </div>
 		  </div>

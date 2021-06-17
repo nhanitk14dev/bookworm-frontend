@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Jumbotron } from 'react-bootstrap';
+import { Jumbotron, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import OnSale from './partials/OnSale'
 import FeaturedBook from './partials/FeaturedBook'
@@ -13,7 +13,14 @@ export default class Home extends Component {
       <Fragment>
         <div className='home fadeIn mt-5'>
           <Jumbotron>
-          <h2>{t('on_sale')}</h2>
+          <div className="float-left"><h2>{t('on_sale')}</h2></div>
+          <div className="float-right">
+            <Button href="/shop">
+              View All
+              <i class="fas fa-arrow-right ml-1"></i>
+            </Button>
+            </div>
+          <div class="clearfix"></div>
           <OnSale/>
           </Jumbotron>
 
