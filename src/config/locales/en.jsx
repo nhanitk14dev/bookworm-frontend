@@ -26,7 +26,7 @@ export const en = {
   'model.user': 'user',
   'page.shop': 'Shop',
   'page.home': 'Home',
-  'page.about': 'About',
+  'page.about': 'About Us',
   'page.cart': 'Cart',
   'alert.create_success': 'The {model} was created sucessfully.',
   'alert.create_fail': 'The {model} has not been created yet.',
