@@ -156,3 +156,30 @@
     }
   }
 }
+
+#customer-reviews {
+  .star-points span {
+    text-decoration: underline;
+    padding: 0 4px;
+  }
+
+  .border-right {
+    border-right: 1px solid $div-background-color-black !important;
+  }
+
+  .rv-item {
+    border-bottom: 1px solid;
+    padding: 15px 5px;
+
+    .rv-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-right: 5px;
+    }
+
+    .rv-star {
+      border-left: 1px solid $div-background-color-black;
+      padding-left: 5px;
+    }
+  }
+}

@@ -43,13 +43,11 @@ class Shop extends Component {
   renderPagination = () => {
     return (
       <Pagination>
-      <Pagination.First />
       <Pagination.Prev />
       <Pagination.Item>{1}</Pagination.Item>
       <Pagination.Item active>{2}</Pagination.Item>
       <Pagination.Item>{3}</Pagination.Item>
       <Pagination.Next />
-      <Pagination.Last />
     </Pagination>
     );
   }
