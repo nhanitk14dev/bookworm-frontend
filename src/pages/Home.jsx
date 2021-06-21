@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { Jumbotron, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import OnSale from './partials/OnSale'
-import FeaturedBook from './partials/FeaturedBook'
+import OnSale from '../components/Home/OnSale'
+import FeaturedBook from '../components/Home/FeaturedBook'
 
 export default class Home extends Component {
 

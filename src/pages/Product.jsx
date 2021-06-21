@@ -2,11 +2,11 @@ import React, { Component, Fragment } from 'react'
 import { Row, Col, Card, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router'
-import BreadCrumb from '../../Layout/BreadCrumb';
-import images1 from '../../assets/images/products/product3-250x250.jpg';
+import BreadCrumb from '../common/BreadCrumb';
+import images1 from '../assets/images/products/product3-250x250.jpg';
 import InputSpinner from 'react-bootstrap-input-spinner'
-import WriteReview from './partials/WriteReview';
-import CustomerReviews from './partials/CustomerReviews';
+import WriteReview from '../components/Product/WriteReview';
+import CustomerReviews from '../components/Product/CustomerReviews';
 
 class Product extends Component {
 

@@ -1,8 +1,8 @@
 import { Component, Fragment } from "react";
 import PropTypes from 'prop-types';
 import { Row, Col, Form, Dropdown, DropdownButton, Pagination } from 'react-bootstrap';
-import images from '../../assets/images/products/product3-250x250.jpg';
-import SingleProductCommon from '../Common/SingleProductCommon';
+import images from '../assets/images/products/product3-250x250.jpg';
+import SingleProductCommon from '../common/SingleProductCommon';
 import ReactPaginate from 'react-paginate';
 import Select from 'react-select'
 

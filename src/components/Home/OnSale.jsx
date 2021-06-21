@@ -2,9 +2,9 @@ import { Component } from "react";
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
-import slide1 from '../../../assets/images/products/product1-250x250.jpg';
-import slide2 from '../../../assets/images/products/product2-250x250.jpg';
-import slide3 from '../../../assets/images/products/product3-250x250.jpg';
+import slide1 from '../../assets/images/products/product1-250x250.jpg';
+import slide2 from '../../assets/images/products/product2-250x250.jpg';
+import slide3 from '../../assets/images/products/product3-250x250.jpg';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
 
@@ -58,23 +58,23 @@ class OnSale extends Component {
   };
 
   render() {
-    return (<div>
-        <div className="home-onsale">
-          <div className="product-carousel">
-            <OwlCarousel className='owl-theme' 
-              loop
-              margin={10}
-              nav
-              autoplay={true}
-              responsiveClass={true}
-              lazyLoad={true}
-              responsive={this.state.responsiveCarousel}>
-              {this.renderCarousel()}
-            </OwlCarousel>
-          </div>
-          
-        </div>
-      </div>);
+    return (
+      <div className="home-onsale">
+        <div className="product-carousel">
+          <OwlCarousel className='owl-theme' 
+            loop
+            margin={10}
+            nav
+            dots={false}
+            autoplay={true}
+            responsiveClass={true}
+            lazyLoad={true}
+            responsive={this.state.responsiveCarousel}>
+            {this.renderCarousel()}
+          </OwlCarousel>
+        </div>      
+      </div>
+    );
   }
 }
 

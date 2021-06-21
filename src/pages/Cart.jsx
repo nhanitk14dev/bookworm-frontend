@@ -8,8 +8,8 @@ import {
 } from 'react-bootstrap'
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import BreadCrumb from '../../Layout/BreadCrumb';
-import images from '../../assets/images/products/product3-250x250.jpg';
+import BreadCrumb from '../common/BreadCrumb';
+import images from '../assets/images/products/product3-250x250.jpg';
 
 class Cart extends Component {
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Header from './Header/'
+import Header from '../components/Header/Menu'
 import { connect } from 'react-redux'
 
 class Layout extends Component {

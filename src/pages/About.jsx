@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import BreadCrumb from '../../Layout/BreadCrumb';
+import BreadCrumb from '../common/BreadCrumb';
 
 export default class About extends React.Component {
 

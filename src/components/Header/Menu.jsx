@@ -9,23 +9,24 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 
-class CHeader extends Component {
+class Menu extends Component {
+
   renderBrand() {
-    return <NavLink to='/'>
-      <Navbar.Brand>
-        <img
-          src={logo}
-          className="app-logo"
-          alt="Brand" />
-      </Navbar.Brand>
-      <Navbar.Text className='mr-3'>
-        <NavLink
-          to='/'>
-          BOOKWORM
-        </NavLink>
-      </Navbar.Text>
-    </NavLink>
+    return (
+      <NavLink to='/'>
+        <Navbar.Brand>
+          <img src={logo} className="app-logo" alt="Brand"/>
+        </Navbar.Brand>
+        <Navbar.Text className='mr-3'>
+          <NavLink
+            to='/'>
+            BOOKWORM
+          </NavLink>
+        </Navbar.Text>
+      </NavLink>
+    );
   }
+
   renderLinks() {
     let t = this.context.t
     return <Nav className="mr-auto">
@@ -65,8 +66,8 @@ class CHeader extends Component {
     </Navbar>
   }
 }
-CHeader.contextTypes = {
+Menu.contextTypes = {
   t: PropTypes.func
 }
-const Header = connect(null)(CHeader)
-export default withRouter(Header)
+
+export default withRouter(Menu)
