@@ -3,7 +3,7 @@ import { apiEndpoints } from '../helpers';
 
 export const bookService = {
   getDiscountBooks,
-  getRecommendedBooks
+  getBooksByRecommendedOrPopular
 };
 
 function getDiscountBooks() {
@@ -22,15 +22,23 @@ function getDiscountBooks() {
   );
 }
 
-function getRecommendedBooks() {
+function getBooksByRecommendedOrPopular(key) {
+  let apiByKey = apiEndpoints.recommended_books;
+  if (key == 'popular') {
+    apiByKey = apiEndpoints.popular_books;
+  }
+
   return (
     axios
     .get(
-      apiEndpoints.recommended_books
+      apiByKey
     )
     .then(res => {
       if (res && res.status === 200) {
-        return res.data;
+        let dt = res.data;
+        return {
+          data: dt.recommended_books ? dt.recommended_books : dt.popular_books,
+        }
       }
       return false;
     })

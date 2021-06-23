@@ -1,7 +1,6 @@
 import { Component } from "react";
 import { Nav, Row, Col } from 'react-bootstrap'
 import PropTypes from 'prop-types';
-import images from '../../assets/images/products/product3-250x250.jpg';
 import SingleProductCommon from '../../common/SingleProductCommon';
 import { bookService } from '../../services';
 import _ from 'lodash';
@@ -13,17 +12,26 @@ class FeaturedBook extends Component {
     this.state = {
       data: [],
     };
+    this.onSelectKey = this.onSelectKey.bind(this);
   }
 
   componentDidMount() {
-    bookService.getRecommendedBooks()
+    this.handleGetProductsByKeys();
+  }
+
+  handleGetProductsByKeys = (key = '') => {
+    bookService.getBooksByRecommendedOrPopular(key)
       .then(res => {
         if (res) {
           this.setState({
-            data: res.recommended_books
+            data: res.data
           });
         }
       });
+  }
+
+  onSelectKey(selectedKey) {
+    this.handleGetProductsByKeys(selectedKey);
   }
 
   renderSingleProduct = () => {
@@ -41,20 +49,25 @@ class FeaturedBook extends Component {
 
   render() {
     let t = this.context.t;
+    const books = this.state.data;
 
     return (
       <div className="featured-book">
         <div className="tab-container">
           <Nav variant="pills" className="justify-content-center" defaultActiveKey="#">
             <Nav.Item>
-              <Nav.Link href="#">{t('product.recommended')}</Nav.Link>
+              <Nav.Link href="#" onSelect={this.onSelectKey} >
+                {t('product.recommended')}
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="link-1">{t('product.popular')}</Nav.Link>
+              <Nav.Link eventKey="popular" onSelect={this.onSelectKey}>
+              {t('product.popular')}
+              </Nav.Link>
             </Nav.Item>
           </Nav>
           <Row>
-          { this.state.data.length ? this.renderSingleProduct() : '' }
+          { books.length ? this.renderSingleProduct() : '' }
           </Row>
         </div>
       </div>

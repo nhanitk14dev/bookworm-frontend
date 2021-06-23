@@ -5,6 +5,7 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 let endpoints = {
   discount_books: '/api/discount-books',
   recommended_books: '/api/recommended-books',
+  popular_books: '/api/popular-books'
 }
 
 let API_ENDPOINTS = {};
