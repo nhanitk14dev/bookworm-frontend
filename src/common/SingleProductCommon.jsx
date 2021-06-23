@@ -2,18 +2,19 @@ import { Link } from 'react-router-dom';
 import noImage from '../assets/images/no-image.png';
 import { PureComponent } from "react";
 import PropTypes from 'prop-types';
+const apiBaseURL = process.env.REACT_APP_API_BASE_URL;
 
 class SingleProductCommon extends PureComponent {
-  
+
   render() {
     let t = this.context.t
-    let product = this.props.product;
-    let srcImg = product && product.imgSrc ? (window.location.origin + product.imgSrc) : noImage;
+    let item = this.props.book;
+    let srcImg = item.book_cover_photo ? apiBaseURL + item.book_cover_photo : noImage;
 
     return (
       <div className="single-product">
 			  <div className="product-f-image">
-			    <img src={srcImg} alt="item" className="item"/>
+			    <img alt="item" className="item" src={srcImg}/>
 			    <div className="product-hover">
 			      <Link to="/" className="add-to-cart-link">
 			      	<i className="fa fa-shopping-cart"></i>
@@ -24,15 +25,21 @@ class SingleProductCommon extends PureComponent {
 			    </div>
 			  </div>
 			  <div className="info">
-			    <h2><Link to="/product/book-tom-and-jerry">{product ? product.title : 'N/A'}</Link></h2>
-			    <div>{product && product.author ? product.author : null}</div>
+			    <h2><Link to="/product/book-tom-and-jerry">{item.book_title}</Link></h2>
+			    <div>Author</div>
 			    <div className="product-carousel-price">
-			        <ins>${product ? product.price : 0}</ins> 
-			        <del>{product ? product.discount_price : null}</del>
+			    	{item.discount ? (
+						  <div>
+						  	<ins>${(item.book_price) - (item.discount.discount_price)}</ins> 
+                <del>${item.book_price}</del>
+						  </div>
+						) : (
+						  <div><ins>${(item.book_price)}</ins></div>
+						)}
 			    </div> 
 			  </div>
 			</div>
-    );
+    )
   }
 }
 

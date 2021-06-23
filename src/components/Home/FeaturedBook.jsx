@@ -3,28 +3,45 @@ import { Nav, Row, Col } from 'react-bootstrap'
 import PropTypes from 'prop-types';
 import images from '../../assets/images/products/product3-250x250.jpg';
 import SingleProductCommon from '../../common/SingleProductCommon';
-
-const product = {
-  imgSrc: images,
-  title: 'Book Cartoon Tom&Jerry',
-  price: '650.00'
-};
+import { bookService } from '../../services';
+import _ from 'lodash';
 
 class FeaturedBook extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-
+      data: [],
     };
   }
 
+  componentDidMount() {
+    bookService.getRecommendedBooks()
+      .then(res => {
+        if (res) {
+          this.setState({
+            data: res.recommended_books
+          });
+        }
+      });
+  }
+
   renderSingleProduct = () => {
-    return (<SingleProductCommon product={product}/>);
+    let res = [];
+    _.forEach(this.state.data, function(item) {
+      let html = (
+        <Col lg={3} sm={6}>
+            <SingleProductCommon book={item}/>
+        </Col>
+      )
+      res.push(html);
+    });
+    return res;
   };
 
   render() {
     let t = this.context.t;
+
     return (
       <div className="featured-book">
         <div className="tab-container">
@@ -37,16 +54,7 @@ class FeaturedBook extends Component {
             </Nav.Item>
           </Nav>
           <Row>
-            <Col lg={3} sm={6}>{this.renderSingleProduct()}</Col>
-            <Col lg={3} sm={6}>{this.renderSingleProduct()}</Col>
-            <Col lg={3} sm={6}>{this.renderSingleProduct()}</Col>
-            <Col lg={3} sm={6}>{this.renderSingleProduct()}</Col>
-          </Row>
-          <Row>
-            <Col lg={3} sm={6}>{this.renderSingleProduct()}</Col>
-            <Col lg={3} sm={6}>{this.renderSingleProduct()}</Col>
-            <Col lg={3} sm={6}>{this.renderSingleProduct()}</Col>
-            <Col lg={3} sm={6}>{this.renderSingleProduct()}</Col>
+          { this.state.data.length ? this.renderSingleProduct() : '' }
           </Row>
         </div>
       </div>
