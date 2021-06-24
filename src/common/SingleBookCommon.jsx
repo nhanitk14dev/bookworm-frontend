@@ -9,42 +9,52 @@ class SingleBookCommon extends PureComponent {
   render() {
     let t = this.context.t
     let item = this.props.book;
-    let srcImg = item.book_cover_photo ? apiBaseURL + item.book_cover_photo : noImage;
-
     return (
-      <div className="single-book">
-			  <div className="book-f-image">
-			    <img alt="item" className="item" src={srcImg}/>
-			    <div className="book-hover">
-			      <Link to="/" className="add-to-cart-link">
-			      	<i className="fa fa-shopping-cart"></i>
-			      </Link>
-			      <Link className="view-details-link" target="_blank" rel="noopener noreferrer" to={`/books/${item.slug}`}>
-			      	<i className="fa fa-eye"></i>
-			      </Link>
-			    </div>
-			  </div>
-			  <div className="info">
-			    <h2><Link to={`/books/${item.slug}`}>{item.book_title}</Link></h2>
-			    <div>Author</div>
-			    <div className="book-carousel-price">
-			    	{item.discount ? (
-						  <div>
-						  	<ins>${(item.book_price) - (item.discount.discount_price)}</ins> 
-                <del>${item.book_price}</del>
-						  </div>
-						) : (
-						  <div><ins>${(item.book_price)}</ins></div>
-						)}
-			    </div> 
-			  </div>
+      <div className="wrap-book-page">
+      {
+      	(
+      		(item) &&
+      		<div className="single-book">
+				    <div className="book-f-image">
+				      <img alt="item" className="item" src={apiBaseURL + item.book_cover_photo || noImage} />
+				      <div className="book-hover">
+				        <Link to="/" className="add-to-cart-link">
+				        <i className="fa fa-shopping-cart"></i>
+				        </Link>
+				        <Link className="view-details-link" target="_blank" rel="noopener noreferrer" to={`/books/${item.slug}`}> <i className="fa fa-eye"></i>
+				        </Link>
+				      </div>
+				    </div>
+				    <div className="info">
+				      <h2>
+				        <Link to={`/books/${item.slug}`}>{item.book_title} </Link> 
+				      </h2>
+				    </div>
+				    <div className="book-carousel-price">
+				      {item.discount ? (
+					      <div>
+					        <ins>${(item.book_price) - (item.discount.discount_price)}</ins>
+					        <del>${item.book_price}</del>
+					      </div>
+					      ) : (
+					      <div><ins>${(item.book_price)}</ins>
+					      </div>
+				      )}
+				    </div>
+			  	</div>
+      	)
+      }
 			</div>
-    )
+    );
   }
 }
 
 SingleBookCommon.contextTypes = {
   t: PropTypes.func
 }
+
+SingleBookCommon.defaultProps = {
+  item: ''
+};
 
 export default SingleBookCommon;

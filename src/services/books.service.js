@@ -41,7 +41,7 @@ function getDiscountBooks() {
 
 function getBooksByRecommendedOrPopular(key) {
   let apiByKey = apiEndpoints.recommended_books;
-  if (key == 'popular') {
+  if (key === 'popular') {
     apiByKey = apiEndpoints.popular_books;
   }
 
@@ -62,3 +62,4 @@ function getBooksByRecommendedOrPopular(key) {
     .catch(error => console.log(error))
   );
 }
+
