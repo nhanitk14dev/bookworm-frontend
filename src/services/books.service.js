@@ -4,14 +4,35 @@ import { apiEndpoints, apiEndpointFunction } from '../helpers';
 export const bookService = {
   getDiscountBooks,
   getBooksByRecommendedOrPopular,
-  getSingleBookBySlug
+  getSingleBookBySlug,
+  getBooksService
 };
+
+function getBooksService(page) {
+  return (
+    axios
+    .get(
+      apiEndpointFunction.endpointBooks(), {
+        params: { page: page }
+      }
+    )
+    .then(res => {
+      if (res && res.status === 200) {
+        return {
+          data: res.data.products,
+          metaData: res.data.meta_data
+        }
+      }
+      return false;
+    })
+  );
+}
 
 function getSingleBookBySlug(slug) {
   return (
     axios
     .get(
-      apiEndpointFunction.getBookBySlug(slug)
+      apiEndpointFunction.endpointBookBySlug(slug)
     )
     .then(res => {
       if (res && res.status === 200) {
@@ -62,4 +83,3 @@ function getBooksByRecommendedOrPopular(key) {
     .catch(error => console.log(error))
   );
 }
-

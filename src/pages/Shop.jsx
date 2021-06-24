@@ -1,16 +1,11 @@
 import { Component, Fragment } from "react";
 import PropTypes from 'prop-types';
-import { Row, Col, Form, Dropdown, DropdownButton, Pagination } from 'react-bootstrap';
-import images from '../assets/images/products/product3-250x250.jpg';
+import { Row, Col, Form, Dropdown, DropdownButton } from 'react-bootstrap';
 import SingleBookCommon from '../common/SingleBookCommon';
 import ReactPaginate from 'react-paginate';
 import Select from 'react-select'
-
-const product = {
-  imgSrc: images,
-  title: 'Book Cartoon Tom&Jerry',
-  price: '650.00'
-};
+import { bookService } from '../services';
+import _ from 'lodash';
 
 const options = [
   { value: 'a', label: 'Book A' },
@@ -24,36 +19,38 @@ const FilterComponent = () => (
 
 class Shop extends Component {
 
-  renderProductsWithPaging = () => {
-    let html = [];
-    for (let i = 1; i <= 4; i++) {
-      html.push(
-        <Row key={i}>
-          <Col lg={3} md={6} sm={12}><SingleBookCommon product={product}/></Col>
-          <Col lg={3} md={6} sm={12}><SingleBookCommon product={product}/></Col>
-          <Col lg={3} md={6} sm={12}><SingleBookCommon product={product}/></Col>
-          <Col lg={3} md={6} sm={12}><SingleBookCommon product={product}/></Col>
-        </Row>
-      );
-    }
-
-    return html;
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+    };
   }
 
-  renderPagination = () => {
-    return (
-      <Pagination>
-      <Pagination.Prev />
-      <Pagination.Item>{1}</Pagination.Item>
-      <Pagination.Item active>{2}</Pagination.Item>
-      <Pagination.Item>{3}</Pagination.Item>
-      <Pagination.Next />
-    </Pagination>
-    );
+  componentDidMount() {
+    this.handleGetBooks();
+  }
+
+  handleGetBooks = (page) => {
+    bookService.getBooksService(page)
+      .then(res => {
+        if (res) {
+          this.setState({
+            data: res.data,
+            pageCount: res.metaData.lastPage,
+            perPage: res.metaData.perPage
+          });
+        }
+      });
+  }
+
+  handlePageClick = (index) => {
+    let page = index.selected + 1;
+    this.handleGetBooks(page);
   }
 
   render() {
     let t = this.context.t
+    const books = this.state.data;
 
     return (
       <Fragment>
@@ -101,12 +98,36 @@ class Shop extends Component {
                   </DropdownButton>
                 </div>
               </div>
-              
-              {this.renderProductsWithPaging()}
+
+              {books.length > 0 ? (
+              <div className="list-books">
+                <Row>
+                  {books.map((item) => (
+                    <Col lg={3} sm={6}>
+                      <SingleBookCommon 
+                        book={item}
+                        key={item.id}
+                      />
+                    </Col>
+                  ))}
+                </Row>
+              </div>
+              ) : (
+                <h4>{t('book.no_book_at_shop')}</h4>
+              )}
 
               <Row>
                 <Col md={{ span: 6, offset: 3 }}>
-                  {this.renderPagination()}
+                  <ReactPaginate
+                    previousLabel={'‹'}
+                    nextLabel={'›'}
+                    breakLabel={'...'}
+                    pageCount={this.state.pageCount}
+                    pageRangeDisplayed={5}
+                    onPageChange={this.handlePageClick.bind(this)}
+                    containerClassName={'pagination'}
+                    activeClassName={'active'}
+                  />
                 </Col>
               </Row>
             </Col>
@@ -115,7 +136,6 @@ class Shop extends Component {
       </Fragment>
     );
   }
-
 }
 
 Shop.contextTypes = {

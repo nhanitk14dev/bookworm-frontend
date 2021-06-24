@@ -15,8 +15,11 @@ export const apiEndpoints = API_ENDPOINTS;
 
 
 let API_ENDPOINTS_FUNCTION = {
-  getBookBySlug: (slug) => {
+  endpointBookBySlug: (slug) => {
     return API_BASE_URL + `/api/books/:${slug}`;
   },
+  endpointBooks: () => {
+    return API_BASE_URL + `/api/books`;
+  }
 }
 export const apiEndpointFunction = API_ENDPOINTS_FUNCTION;
