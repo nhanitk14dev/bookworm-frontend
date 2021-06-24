@@ -53,13 +53,13 @@ class OnSale extends Component {
               <Link to="/" className="add-to-cart-link">
                 <i className="fa fa-shopping-cart"></i> 
               </Link>
-              <Link className="view-details-link" target="_blank" rel="noopener noreferrer" to={`/books/${item.slug}`}>
+              <Link className="view-details-link" target="_blank" rel="noopener noreferrer" to={`/book/${item.slug}`}>
                 <i className="fa fa-eye"></i>
               </Link>
             </div>
           </div>
           <div className="info">
-            <h2><Link to={`/books/${item.slug}`}>{item.book_title}</Link></h2>
+            <h2><Link to={`/book/${item.slug}`}>{item.book_title}</Link></h2>
             <p>Author Name: David</p>
             <div className="book-carousel-price">
                 <ins>${(item.book_price) - (item.discount.discount_price)}</ins> 

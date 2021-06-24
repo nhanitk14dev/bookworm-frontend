@@ -36,7 +36,9 @@ function getSingleBookBySlug(slug) {
     )
     .then(res => {
       if (res && res.status === 200) {
-        return res.data;
+        return {
+          data: res.data.book
+        }
       }
       return false;
     })

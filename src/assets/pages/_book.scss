@@ -21,14 +21,15 @@
     margin-top: 15px;
   }
 
-  ins {
-    font-weight: 700;
-    margin-right: 5px;
-    text-decoration: none;
+  .info {
+    padding: 5px 7px;
   }
 
-  .info {
-    padding: 5px;
+  .book-carousel-price {
+    padding: 0.75rem 1rem;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
   }
 
   .book-hover {
@@ -147,19 +148,6 @@
       }
     }
   }
-
-  .add-cart {
-
-    del {
-      font-size: 20px;
-    }
-
-    .price {
-      font-weight: 700;
-      font-size: 30px;
-      margin-left: 5px;
-    }
-  }
 }
 
 #customer-reviews {
@@ -186,5 +174,18 @@
       border-left: 1px solid $div-background-color-black;
       padding-left: 5px;
     }
+  }
+}
+
+.book-price {
+  del {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+
+  ins {
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 24px;
   }
 }

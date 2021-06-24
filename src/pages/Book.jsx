@@ -3,7 +3,6 @@ import { Row, Col, Card, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router'
 import BreadCrumb from '../common/BreadCrumb';
-import images1 from '../assets/images/products/product3-250x250.jpg';
 import InputSpinner from 'react-bootstrap-input-spinner'
 import WriteReview from '../components/Book/WriteReview';
 import CustomerReviews from '../components/Book/CustomerReviews';
@@ -14,7 +13,8 @@ class Book extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      books: {}
+      book: '',
+      slug: ''
     }
   }
 
@@ -25,71 +25,85 @@ class Book extends Component {
 
   displaySingleBookBySlug = (slug) => {
     bookService.getSingleBookBySlug(slug)
-      .then(result => {
-        if (result) {
-          console.log(result);
+      .then(res => {
+        if (res) {
+          this.setState({
+            book: res.data,
+            slug: slug
+          });
         }
       });
   }
 
   render() {
     let t = this.context.t
+    const book = this.state.book;
+    const apiBaseURL = process.env.REACT_APP_API_BASE_URL;
 
     return (
       <Fragment>
-        <div id="product-details-page" className='fadeIn mt-5'>
+        <div id="book-details-page" className='fadeIn mt-5'>
           <BreadCrumb
             level1="Category Name"
-            level2='book-tom-and-jerry'
             path="/shop"
-          />
-          <Row>
-            <Col lg={7} md={12}>
-              <div className="product-info">
-                <div className="product-f-image">
-                  <img src={images1} alt="placeholder" className="img-thumbnail"/>
-                  <div className="mt-2 text-center">By (author) <strong>Nhan David</strong></div>
-                </div>
-                <div className="content">
-                  <h3 className="title-b">Book Title</h3>
-                  <div>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                    Nam tristique, diam in consequat iaculis, 
-                    est purus iaculis mauris, imperdiet facilisis ante ligula at nulla. 
-                    Quisque volutpat nulla risus, id maximus ex aliquet ut
+            level2={book ? book.book_title : this.state.slug}
+            />
+          {book && (
+            <Row>
+              <Col lg={7} md={12}>
+                <div className="book-info">
+                  <div className="book-f-image">
+                    <img alt="placeholder" className="img-thumbnail" src={apiBaseURL + book.book_cover_photo}/>
+                    <div className="mt-2 text-center">
+                     By (author) <strong>Nhan David</strong>
+                    </div>
+                  </div>
+                  <div className="content">
+                    <h3 className="title-b">{book.book_title}</h3>
+                    <div>
+                      {book.book_summary}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Col>
-            <Col lg={5} md={12}>
-              <div className="add-cart">
-                <Card>
-                  <Card.Header>
-                    <del>$49.00</del>
-                    <ins className="price">$30.00</ins>
+              </Col>
+              <Col lg={5} md={12}>
+                <div className="add-cart">
+                  <Card>
+                    <Card.Header>
+                      {book.discount ? (
+                        <div className="book-price">
+                          <del>${book.book_price}</del>
+                          <ins>${(book.book_price) - (book.discount.discount_price)}</ins>
+                        </div>
+                        ) : (
+                        <div className="book-price">
+                          <ins>${(book.book_price)}</ins>
+                        </div>
+                      )}
                     </Card.Header>
-                  <Card.Body>
-                    <Card.Text>
-                      Quantity
-                    </Card.Text>
-                    <InputSpinner
-                      type={'real'}
-                      max={10}
-                      min={1}
-                      step={1}
-                      value={1}
-                      onChange={num=>console.log(num)}
-                      variant={'dark'}
-                      size="md"
-                    />
-                    <Button variant="primary" size="lg" block className="mt-3">
-                      Add to cart
-                    </Button>
-                  </Card.Body>
-                </Card>
-              </div>
-            </Col>
-          </Row>
+                    <Card.Body>
+                      <Card.Text>
+                        Quantity
+                      </Card.Text>
+                      <InputSpinner
+                        type={'real'}
+                        max={10}
+                        min={1}
+                        step={1}
+                        value={1}
+                        onChange={num=>console.log(num)}
+                        size="md"
+                        variant={'dark'}
+                      />
+                      <Button variant="primary" size="lg" block className="mt-3">
+                        Add to cart
+                      </Button>
+                    </Card.Body>
+                  </Card>
+                </div>
+              </Col>
+            </Row>
+          )}
 
           <Row>
             <Col lg={7} md={12}>
