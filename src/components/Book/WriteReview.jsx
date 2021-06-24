@@ -12,7 +12,7 @@ class WriteReview extends Component {
       <div className="box-add-review">
         <Card>
           <Card.Header>
-            <h3 className="title-b">{t('product.write_reviews')}</h3>
+            <h3 className="title-b">{t('book.write_reviews')}</h3>
           </Card.Header>
           <Card.Body>
             <Form>

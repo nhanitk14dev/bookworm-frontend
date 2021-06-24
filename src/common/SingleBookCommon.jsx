@@ -4,7 +4,7 @@ import { PureComponent } from "react";
 import PropTypes from 'prop-types';
 const apiBaseURL = process.env.REACT_APP_API_BASE_URL;
 
-class SingleProductCommon extends PureComponent {
+class SingleBookCommon extends PureComponent {
 
   render() {
     let t = this.context.t
@@ -12,22 +12,22 @@ class SingleProductCommon extends PureComponent {
     let srcImg = item.book_cover_photo ? apiBaseURL + item.book_cover_photo : noImage;
 
     return (
-      <div className="single-product">
-			  <div className="product-f-image">
+      <div className="single-book">
+			  <div className="book-f-image">
 			    <img alt="item" className="item" src={srcImg}/>
-			    <div className="product-hover">
+			    <div className="book-hover">
 			      <Link to="/" className="add-to-cart-link">
 			      	<i className="fa fa-shopping-cart"></i>
 			      </Link>
-			      <Link className="view-details-link" to="/product/book-tom-and-jerry" target="_blank" rel="noopener noreferrer">
+			      <Link className="view-details-link" target="_blank" rel="noopener noreferrer" to={`/books/${item.slug}`}>
 			      	<i className="fa fa-eye"></i>
 			      </Link>
 			    </div>
 			  </div>
 			  <div className="info">
-			    <h2><Link to="/product/book-tom-and-jerry">{item.book_title}</Link></h2>
+			    <h2><Link to={`/books/${item.slug}`}>{item.book_title}</Link></h2>
 			    <div>Author</div>
-			    <div className="product-carousel-price">
+			    <div className="book-carousel-price">
 			    	{item.discount ? (
 						  <div>
 						  	<ins>${(item.book_price) - (item.discount.discount_price)}</ins> 
@@ -43,8 +43,8 @@ class SingleProductCommon extends PureComponent {
   }
 }
 
-SingleProductCommon.contextTypes = {
+SingleBookCommon.contextTypes = {
   t: PropTypes.func
 }
 
-export default SingleProductCommon;
+export default SingleBookCommon;

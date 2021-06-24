@@ -24,7 +24,7 @@ class CustomerReviews extends Component {
       <div id="customer-reviews">
         <Jumbotron>
           <div>
-            <h3 className="title-b">{t('product.customer_reviews')}
+            <h3 className="title-b">{t('book.customer_reviews')}
             <small> (Filtered by 5 start)</small>
             </h3>
             <h2>4.6 Star</h2>

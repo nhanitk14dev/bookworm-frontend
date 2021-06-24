@@ -2,7 +2,7 @@ import { Component, Fragment } from "react";
 import PropTypes from 'prop-types';
 import { Row, Col, Form, Dropdown, DropdownButton, Pagination } from 'react-bootstrap';
 import images from '../assets/images/products/product3-250x250.jpg';
-import SingleProductCommon from '../common/SingleProductCommon';
+import SingleBookCommon from '../common/SingleBookCommon';
 import ReactPaginate from 'react-paginate';
 import Select from 'react-select'
 
@@ -29,10 +29,10 @@ class Shop extends Component {
     for (let i = 1; i <= 4; i++) {
       html.push(
         <Row key={i}>
-          <Col lg={3} md={6} sm={12}><SingleProductCommon product={product}/></Col>
-          <Col lg={3} md={6} sm={12}><SingleProductCommon product={product}/></Col>
-          <Col lg={3} md={6} sm={12}><SingleProductCommon product={product}/></Col>
-          <Col lg={3} md={6} sm={12}><SingleProductCommon product={product}/></Col>
+          <Col lg={3} md={6} sm={12}><SingleBookCommon product={product}/></Col>
+          <Col lg={3} md={6} sm={12}><SingleBookCommon product={product}/></Col>
+          <Col lg={3} md={6} sm={12}><SingleBookCommon product={product}/></Col>
+          <Col lg={3} md={6} sm={12}><SingleBookCommon product={product}/></Col>
         </Row>
       );
     }

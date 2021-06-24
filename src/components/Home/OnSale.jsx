@@ -46,22 +46,22 @@ class OnSale extends Component {
     let res = [];
     _.map(discountBooks, (item, index) => {
       let html = (
-        <div className="single-product" key={item.id}>
-          <div className="product-f-image">
+        <div className="single-book" key={item.id}>
+          <div className="book-f-image">
             <img alt="item" className="item" src={apiBaseURL + item.book_cover_photo}/>
-            <div className="product-hover">
+            <div className="book-hover">
               <Link to="/" className="add-to-cart-link">
                 <i className="fa fa-shopping-cart"></i> 
               </Link>
-              <Link className="view-details-link" target="_blank" rel="noopener noreferrer" to={`/product/${item.slug}`}>
+              <Link className="view-details-link" target="_blank" rel="noopener noreferrer" to={`/books/${item.slug}`}>
                 <i className="fa fa-eye"></i>
               </Link>
             </div>
           </div>
           <div className="info">
-            <h2><Link to={`/product/${item.slug}`}>{item.book_title}</Link></h2>
+            <h2><Link to={`/books/${item.slug}`}>{item.book_title}</Link></h2>
             <p>Author Name: David</p>
-            <div className="product-carousel-price">
+            <div className="book-carousel-price">
                 <ins>${(item.book_price) - (item.discount.discount_price)}</ins> 
                 <del>${item.book_price}</del>
             </div> 
@@ -76,7 +76,7 @@ class OnSale extends Component {
   render() {
     return (
       <div className="home-onsale">
-        <div className="product-carousel">
+        <div className="book-carousel">
         { this.state.data.length > 0 ?  
           <OwlCarousel className='owl-theme' 
             loop

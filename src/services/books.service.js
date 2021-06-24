@@ -1,10 +1,27 @@
 import axios from "axios";
-import { apiEndpoints } from '../helpers';
+import { apiEndpoints, apiEndpointFunction } from '../helpers';
 
 export const bookService = {
   getDiscountBooks,
-  getBooksByRecommendedOrPopular
+  getBooksByRecommendedOrPopular,
+  getSingleBookBySlug
 };
+
+function getSingleBookBySlug(slug) {
+  return (
+    axios
+    .get(
+      apiEndpointFunction.getBookBySlug(slug)
+    )
+    .then(res => {
+      if (res && res.status === 200) {
+        return res.data;
+      }
+      return false;
+    })
+    .catch(error => console.log(error))
+  );
+}
 
 function getDiscountBooks() {
   return (

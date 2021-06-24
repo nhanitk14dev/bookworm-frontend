@@ -10,7 +10,7 @@ import Layout from '../pages/Layout'
 import Home from '../pages/Home'
 import About from '../pages/About'
 import Shop from '../pages/Shop'
-import Product from '../pages/Product'
+import Book from '../pages/Book'
 import Cart from '../pages/Cart'
 import { connect } from 'react-redux'
 
@@ -26,7 +26,7 @@ class Routes extends Component {
             <Route exact path="/" component={Home}/>
             <Route exact path="/about" component={About}/>
             <Route exact path="/shop" component={Shop}/>
-            <Route exact path="/product/:slug" component={Product}/>
+            <Route exact path="/books/:slug" component={Book}/>
             <Route exact path="/cart" component={Cart}/>
           </Layout>
         </Switch>

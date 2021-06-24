@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Nav, Row, Col } from 'react-bootstrap'
 import PropTypes from 'prop-types';
-import SingleProductCommon from '../../common/SingleProductCommon';
+import SingleBookCommon from '../../common/SingleBookCommon';
 import { bookService } from '../../services';
 import _ from 'lodash';
 
@@ -16,10 +16,10 @@ class FeaturedBook extends Component {
   }
 
   componentDidMount() {
-    this.handleGetProductsByKeys();
+    this.handleGetBooksByKeys();
   }
 
-  handleGetProductsByKeys = (key = '') => {
+  handleGetBooksByKeys = (key = '') => {
     bookService.getBooksByRecommendedOrPopular(key)
       .then(res => {
         if (res) {
@@ -31,7 +31,7 @@ class FeaturedBook extends Component {
   }
 
   onSelectKey(selectedKey) {
-    this.handleGetProductsByKeys(selectedKey);
+    this.handleGetBooksByKeys(selectedKey);
   }
 
   renderSingleProduct = () => {
@@ -39,7 +39,7 @@ class FeaturedBook extends Component {
     _.forEach(this.state.data, function(item) {
       let html = (
         <Col lg={3} sm={6}>
-            <SingleProductCommon book={item}/>
+            <SingleBookCommon book={item}/>
         </Col>
       )
       res.push(html);
@@ -57,12 +57,12 @@ class FeaturedBook extends Component {
           <Nav variant="pills" className="justify-content-center" defaultActiveKey="#">
             <Nav.Item>
               <Nav.Link href="#" onSelect={this.onSelectKey} >
-                {t('product.recommended')}
+                {t('book.recommended')}
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="popular" onSelect={this.onSelectKey}>
-              {t('product.popular')}
+              {t('book.popular')}
               </Nav.Link>
             </Nav.Item>
           </Nav>

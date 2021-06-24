@@ -48,9 +48,9 @@ export const en = {
   'gender.female': 'Female',
   'lang.en': 'English',
   'lang.vi': 'VietNam',
-  'product.recommended': 'Recommended',
-  'product.popular': 'Popular',
-  'product.customer_reviews': 'Customer Reviews',
-  'product.write_reviews': 'Write a Review',
+  'book.recommended': 'Recommended',
+  'book.popular': 'Popular',
+  'book.customer_reviews': 'Customer Reviews',
+  'book.write_reviews': 'Write a Review',
   'see_detail': 'See Detail'
 }

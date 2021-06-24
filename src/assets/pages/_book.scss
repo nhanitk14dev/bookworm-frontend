@@ -1,5 +1,5 @@
-//common product
-.product-f-image {
+//common book
+.book-f-image {
   position: relative;
   padding: 5px;
 
@@ -8,7 +8,7 @@
   }
 }
 
-.single-product {
+.single-book {
   border: 1px solid $div-background-light-gray;
   overflow: hidden;
 
@@ -30,7 +30,7 @@
     padding: 5px;
   }
 
-  .product-hover {
+  .book-hover {
     height: 100%;
     left: 0;
     position: absolute;
@@ -112,7 +112,7 @@
       }
     }
 
-    .product-hover:after {
+    .book-hover:after {
       left: 0
     }
   }
@@ -122,8 +122,8 @@
   }
 }
 
-#product-details-page {
-  .product-info {
+#book-details-page {
+  .book-info {
 
     padding-bottom: 15px;
 
@@ -135,7 +135,7 @@
       display: flex;
       border: 1px solid $div-background-light-gray;
 
-      .product-f-image {
+      .book-f-image {
         width: 40%;
         padding: 0;
         text-align: center;

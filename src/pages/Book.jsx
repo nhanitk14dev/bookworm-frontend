@@ -5,21 +5,31 @@ import { withRouter } from 'react-router'
 import BreadCrumb from '../common/BreadCrumb';
 import images1 from '../assets/images/products/product3-250x250.jpg';
 import InputSpinner from 'react-bootstrap-input-spinner'
-import WriteReview from '../components/Product/WriteReview';
-import CustomerReviews from '../components/Product/CustomerReviews';
+import WriteReview from '../components/Book/WriteReview';
+import CustomerReviews from '../components/Book/CustomerReviews';
+import { bookService } from '../services';
 
-class Product extends Component {
+class Book extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      product: {}
+      books: {}
     }
   }
 
-  // https://reactjs.org/docs/react-component.html#componentdidmount
   componentDidMount() {
-    let slug = this.props.match.params.slug
+    let slug = this.props.match.params.slug;
+    this.displaySingleBookBySlug(slug);
+  }
+
+  displaySingleBookBySlug = (slug) => {
+    bookService.getSingleBookBySlug(slug)
+      .then(result => {
+        if (result) {
+          console.log(result);
+        }
+      });
   }
 
   render() {
@@ -96,10 +106,10 @@ class Product extends Component {
 
 }
 
-Product.contextTypes = {
+Book.contextTypes = {
   t: PropTypes.func
 }
 
 
 // withRouter will set match, location and history to Component props whenever route changes
-export default withRouter(Product);
+export default withRouter(Book);
