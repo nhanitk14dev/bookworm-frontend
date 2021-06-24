@@ -1,5 +1,47 @@
 @import "variables";
 
+// BOOTSTRAP 4 VARIABLES
+@import "bootstrap4/functions";
+@import "bootstrap4/variables";
+@import "bootstrap4/mixins";
+
+// BOOTSTRAP 4 IMPORTS
+@import "bootstrap4/root";
+@import "bootstrap4/reboot";
+@import "bootstrap4/type";
+@import "bootstrap4/images";
+@import "bootstrap4/code";
+@import "bootstrap4/grid";
+@import "bootstrap4/tables";
+@import "bootstrap4/forms";
+@import "bootstrap4/buttons";
+@import "bootstrap4/transitions";
+@import "bootstrap4/dropdown";
+@import "bootstrap4/button-group";
+@import "bootstrap4/input-group";
+@import "bootstrap4/custom-forms";
+@import "bootstrap4/nav";
+@import "bootstrap4/navbar";
+@import "bootstrap4/card";
+@import "bootstrap4/breadcrumb";
+@import "bootstrap4/pagination";
+@import "bootstrap4/badge";
+@import "bootstrap4/jumbotron";
+@import "bootstrap4/alert";
+@import "bootstrap4/progress";
+@import "bootstrap4/media";
+@import "bootstrap4/list-group";
+@import "bootstrap4/close";
+@import "bootstrap4/toasts";
+@import "bootstrap4/modal";
+@import "bootstrap4/tooltip";
+@import "bootstrap4/popover";
+@import "bootstrap4/carousel";
+@import "bootstrap4/spinners";
+@import "bootstrap4/utilities";
+@import "bootstrap4/print";
+
+
 // LAYOUT STYLES IMPORTS
 @import "layout/layout";
 
@@ -9,3 +51,4 @@
 @import 'pages/home-page';
 @import 'pages/book';
 @import 'pages/shop';
+@import 'pages/pagination';

@@ -1,0 +1,28 @@
+.pagination {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  li {
+    cursor: pointer;
+      margin: 5px;
+      border: 1px solid grey;
+      border-radius: 5px;
+      min-width: 35px;
+    a {
+      padding: 5px;
+      color: black;
+      display: block;
+      text-align: center;
+      text-decoration: none !important;
+      border: none !important;
+      outline: none !important;
+    }
+    &.active, &:hover {
+      background-color: #343a40;
+      a {
+        font-weight: bold;
+        color: white;
+      }
+    }
+  }
+}
