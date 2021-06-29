@@ -36,10 +36,13 @@ class FeaturedBook extends Component {
 
   renderSingleProduct = () => {
     let res = [];
-    _.forEach(this.state.data, function(item) {
+    _.map(this.state.data, function(item) {
       let html = (
         <Col lg={3} sm={6}>
-            <SingleBookCommon book={item}/>
+            <SingleBookCommon 
+              book={item}
+              key={item.id}
+            />
         </Col>
       )
       res.push(html);

@@ -5,6 +5,7 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
 import { bookService } from '../../services';
+import SingleBookCommon from '../../common/SingleBookCommon';
 
 class OnSale extends Component {
 
@@ -46,26 +47,11 @@ class OnSale extends Component {
     let res = [];
     _.map(discountBooks, (item, index) => {
       let html = (
-        <div className="single-book" key={item.id}>
-          <div className="book-f-image">
-            <img alt="item" className="item" src={apiBaseURL + item.book_cover_photo}/>
-            <div className="book-hover">
-              <Link to="/" className="add-to-cart-link">
-                <i className="fa fa-shopping-cart"></i> 
-              </Link>
-              <Link className="view-details-link" target="_blank" rel="noopener noreferrer" to={`/book/${item.slug}`}>
-                <i className="fa fa-eye"></i>
-              </Link>
-            </div>
-          </div>
-          <div className="info">
-            <h2><Link to={`/book/${item.slug}`}>{item.book_title}</Link></h2>
-            <p>Author Name: David</p>
-            <div className="book-carousel-price">
-                <ins>${(item.book_price) - (item.discount.discount_price)}</ins> 
-                <del>${item.book_price}</del>
-            </div> 
-          </div>
+        <div>
+          <SingleBookCommon 
+            book={item}
+            key={item.id}
+          />
         </div>
       );
       res.push(html);

@@ -8,20 +8,16 @@ export const bookService = {
   getBooksService
 };
 
-function getBooksService(page) {
+function getBooksService(page, filters) {
   return (
     axios
     .get(
       apiEndpointFunction.endpointBooks(), {
-        params: { page: page }
-      }
-    )
+        params: filters
+      })
     .then(res => {
       if (res && res.status === 200) {
-        return {
-          data: res.data.products,
-          metaData: res.data.meta_data
-        }
+        return res.data.books;
       }
       return false;
     })

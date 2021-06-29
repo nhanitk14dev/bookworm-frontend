@@ -31,16 +31,21 @@ class SingleBookCommon extends PureComponent {
 				      </h2>
 				    </div>
 				    <div className="book-carousel-price">
-				      {item.discount ? (
+				      {(item.discount) ? (
 					      <div className="book-price">
 					        <del>${item.book_price}</del>
 					        <ins>${(item.book_price) - (item.discount.discount_price)}</ins>
 					      </div>
-					      ) : (
+					    ) : (item.sub_price) ? (
 					      <div className="book-price">
-					      	<ins>${(item.book_price)}</ins>
+					      	<del>${item.book_price}</del>
+					      	<ins>${(item.sub_price)}</ins>
 					      </div>
-				      )}
+				      ) : (
+				      	<div className="book-price">
+					        <ins>${item.book_price}</ins>
+					      </div>
+					    )}
 				    </div>
 			  	</div>
       	)

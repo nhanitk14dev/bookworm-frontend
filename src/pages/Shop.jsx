@@ -21,8 +21,16 @@ class Shop extends Component {
 
   constructor(props) {
     super(props);
+    this.handlePageClick = this.handlePageClick.bind(this);
+    this.onSelectSort = this.onSelectSort.bind(this);
+    this.onSelectperPage = this.onSelectperPage.bind(this);
     this.state = {
       data: [],
+      page: 1,
+      sortByKey: 'sale',
+      sortByTitle: 'Sort by on sale',
+      perPage: '8',
+      perPageTitle: 'Show 8'
     };
   }
 
@@ -30,22 +38,74 @@ class Shop extends Component {
     this.handleGetBooks();
   }
 
-  handleGetBooks = (page) => {
-    bookService.getBooksService(page)
+  handleGetBooks = () => {
+
+    const { page } = this.state;
+    const filters = this.getRequestFilters();
+
+    bookService.getBooksService(page, filters)
       .then(res => {
         if (res) {
           this.setState({
             data: res.data,
-            pageCount: res.metaData.lastPage,
-            perPage: res.metaData.perPage
+            pageCount: res.last_page,
+            perPage: res.per_page,
+            showingFrom: res.from,
+            showingTo: res.to,
+            totalBooks: res.total
           });
         }
       });
   }
 
-  handlePageClick = (index) => {
-    let page = index.selected + 1;
-    this.handleGetBooks(page);
+  getRequestFilters() {
+    const { page, sortByKey, perPage } = this.state;
+    let params = {};
+    if (page) {
+      params["page"] = page;
+    }
+
+    if (sortByKey) {
+      params["sortByKey"] = sortByKey;
+    }
+
+    if (perPage) {
+      params['perPage'] = perPage;
+    }
+    return params;
+  }
+
+  onSelectSort(eventKey, e) {
+    this.setState({
+        sortByKey: eventKey,
+        sortByTitle: e.target.text
+      },
+      () => {
+        this.handleGetBooks();
+      }
+    );
+  }
+
+  onSelectperPage(eventKey, e) {
+    this.setState({
+        page: 1, // reset go to page 1
+        perPage: eventKey,
+        perPageTitle: e.target.text
+      },
+      () => {
+        this.handleGetBooks();
+      }
+    );
+  }
+
+  handlePageClick(index) {
+    this.setState({
+        page: index.selected + 1
+      },
+      () => {
+        this.handleGetBooks();
+      }
+    );
   }
 
   render() {
@@ -83,18 +143,37 @@ class Shop extends Component {
             </Col>
             <Col lg={10} md={12}>
               <div className="toolbar-sort clearfix">
-                <div className="showing-total">Showing 1-12 of 100 books</div>
+                <div className="showing-total">
+                  Showing {this.state.showingFrom}-{this.state.showingTo} of {this.state.totalBooks} books
+                </div>
                 <div className="group-sort">
-                  <DropdownButton id="sort-sale" title="Sort by on sale" variant="secondary">
-                    <Dropdown.Item href="#/action">Sort by on sale</Dropdown.Item>
-                    <Dropdown.Item href="#/action">Sort by on popularity</Dropdown.Item>
-                    <Dropdown.Item href="#/action">Sort by price: low to high</Dropdown.Item>
-                    <Dropdown.Item href="#/action">Sort by price: high to low</Dropdown.Item>
+                  <DropdownButton id="sort-sale" variant="secondary" onSelect={this.onSelectSort} title={this.state.sortByTitle}>
+                    <Dropdown.Item eventKey="sale" active={this.state.sortByKey === 'sale' ? 'active' : ''}>
+                      Sort by on sale
+                    </Dropdown.Item>
+                    <Dropdown.Item eventKey="popular" active={this.state.sortByKey === 'popular' ? 'active' : ''}>
+                      Sort by on popularity
+                    </Dropdown.Item>
+                    <Dropdown.Item eventKey="lowPrice" active={this.state.sortByKey === 'lowPrice' ? 'active' : ''}>
+                      Sort by price: low to high
+                    </Dropdown.Item>
+                    <Dropdown.Item eventKey="highPrice" active={this.state.sortByKey === 'highPrice' ? 'active' : ''}>
+                      Sort by price: high to low
+                    </Dropdown.Item>
                   </DropdownButton>
-                  <DropdownButton id="sort-records" title="Show 20" variant="secondary">
-                    <Dropdown.Item href="#/action">Show 20</Dropdown.Item>
-                    <Dropdown.Item href="#/action">Show 50</Dropdown.Item>
-                    <Dropdown.Item href="#/action">Show 100</Dropdown.Item>
+                  <DropdownButton id="sort-records" variant="secondary" onSelect={this.onSelectperPage} title={this.state.perPageTitle}>
+                    <Dropdown.Item eventKey="4" active={this.state.perPage === '4' ? 'active' : ''}>
+                      Show 4
+                    </Dropdown.Item>
+                    <Dropdown.Item eventKey="8" active={this.state.perPage === '8' ? 'active' : ''}>
+                      Show 8
+                    </Dropdown.Item>
+                    <Dropdown.Item eventKey="12" active={this.state.perPage === '12' ? 'active' : ''}>
+                      Show 12
+                    </Dropdown.Item>
+                    <Dropdown.Item eventKey="16" active={this.state.perPage === '16' ? 'active' : ''}>
+                      Show 16
+                    </Dropdown.Item>
                   </DropdownButton>
                 </div>
               </div>
@@ -104,7 +183,7 @@ class Shop extends Component {
                 <Row>
                   {books.map((item) => (
                     <Col lg={3} sm={6}>
-                      <SingleBookCommon 
+                      <SingleBookCommon
                         book={item}
                         key={item.id}
                       />
@@ -119,12 +198,10 @@ class Shop extends Component {
               <Row>
                 <Col md={{ span: 6, offset: 3 }}>
                   <ReactPaginate
-                    previousLabel={'‹'}
-                    nextLabel={'›'}
                     breakLabel={'...'}
                     pageCount={this.state.pageCount}
                     pageRangeDisplayed={5}
-                    onPageChange={this.handlePageClick.bind(this)}
+                    onPageChange={this.handlePageClick}
                     containerClassName={'pagination'}
                     activeClassName={'active'}
                   />
