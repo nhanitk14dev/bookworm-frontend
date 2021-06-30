@@ -44,8 +44,8 @@ class Book extends Component {
       <Fragment>
         <div id="book-details-page" className='fadeIn mt-5'>
           <BreadCrumb
-            level1="Category Name"
             path="/shop"
+            level1={book ? book.category_name : 'N/A'}
             level2={book ? book.book_title : this.state.slug}
             />
           {book && (
@@ -55,7 +55,7 @@ class Book extends Component {
                   <div className="book-f-image">
                     <img alt="placeholder" className="img-thumbnail" src={apiBaseURL + book.book_cover_photo}/>
                     <div className="mt-2 text-center">
-                     By (author) <strong>Nhan David</strong>
+                     By (author) <strong>{book ? book.author_name : 'N/A'}</strong>
                     </div>
                   </div>
                   <div className="content">
