@@ -7,6 +7,15 @@ import Select from 'react-select'
 import { bookService, categoryService, authorService } from '../services';
 import _ from 'lodash';
 
+const ratingReviewoptions = [
+  { value: 'all', label: 'All' },
+  { value: '1', label: '1 Star' },
+  { value: '2', label: '2 Star' },
+  { value: '3', label: '3 Star' },
+  { value: '4', label: '4 Star' },
+  { value: '5', label: '5 Star' }
+];
+
 class Shop extends Component {
 
   constructor(props) {
@@ -14,6 +23,10 @@ class Shop extends Component {
     this.handlePageClick = this.handlePageClick.bind(this);
     this.onSelectSort = this.onSelectSort.bind(this);
     this.onSelectperPage = this.onSelectperPage.bind(this);
+    this.onSelectCategory = this.onSelectCategory.bind(this);
+    this.onSelectAuthor = this.onSelectAuthor.bind(this);
+    this.onSelectRatingReview = this.onSelectRatingReview.bind(this);
+
     this.state = {
       data: [],
       page: 1,
@@ -21,6 +34,9 @@ class Shop extends Component {
       sortByTitle: 'Sort by on sale',
       perPage: '8',
       perPageTitle: 'Show 8',
+      fCategory: '',
+      fRating: '',
+      fAuthor: '',
       SelectCategoryOptions: [],
       SelectAuthorOptions: []
     };
@@ -36,7 +52,9 @@ class Shop extends Component {
     authorService.getAuthors()
       .then(res => {
         if (res) {
-          const options = [];
+          const options = [
+            { value: 'all', label: 'All Authors' }
+          ];
           _.forEach(res.data, function(i) {
             options.push({ value: i.id, label: i.author_name });
           });
@@ -51,7 +69,9 @@ class Shop extends Component {
     categoryService.getCategories()
       .then(res => {
         if (res) {
-          const options = [];
+          const options = [
+            { value: 'all', label: 'All Categories' }
+          ];
           _.forEach(res.data, function(i) {
             options.push({ value: i.id, label: i.category_name });
           });
@@ -75,8 +95,8 @@ class Shop extends Component {
             data: res.data,
             pageCount: res.last_page,
             perPage: res.per_page,
-            showingFrom: res.from,
-            showingTo: res.to,
+            showingFrom: res.from ? res.from : 0,
+            showingTo: res.to ? res.to : 0,
             totalBooks: res.total
           });
         }
@@ -84,7 +104,7 @@ class Shop extends Component {
   }
 
   getRequestFilters() {
-    const { page, sortByKey, perPage } = this.state;
+    const { page, sortByKey, perPage, fCategory, fAuthor, fRating } = this.state;
     let params = {};
     if (page) {
       params["page"] = page;
@@ -97,6 +117,11 @@ class Shop extends Component {
     if (perPage) {
       params['perPage'] = perPage;
     }
+
+    if (fCategory) params['fCategory'] = fCategory;
+    if (fAuthor) params['fAuthor'] = fAuthor;
+    if (fRating) params['fRating'] = fRating;
+
     return params;
   }
 
@@ -116,6 +141,39 @@ class Shop extends Component {
         page: 1, // reset go to page 1
         perPage: eventKey,
         perPageTitle: e.target.text
+      },
+      () => {
+        this.handleGetBooks();
+      }
+    );
+  }
+
+  onSelectCategory(e) {
+    this.setState({
+        page: 1,
+        fCategory: e.value,
+      },
+      () => {
+        this.handleGetBooks();
+      }
+    );
+  }
+
+  onSelectAuthor(e) {
+    this.setState({
+        page: 1,
+        fAuthor: e.value,
+      },
+      () => {
+        this.handleGetBooks();
+      }
+    );
+  }
+
+  onSelectRatingReview(e) {
+    this.setState({
+        page: 1,
+        fRating: e.value
       },
       () => {
         this.handleGetBooks();
@@ -147,21 +205,15 @@ class Shop extends Component {
                 <Form>
                   <Form.Group>
                     <Form.Label>{t('category')}</Form.Label>
-                    <Select options={this.state.SelectCategoryOptions} /> 
+                    <Select onChange={this.onSelectCategory} options={this.state.SelectCategoryOptions}/> 
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>{t('author')}</Form.Label>
-                    <Select options={this.state.SelectAuthorOptions} /> 
+                    <Select onChange={this.onSelectAuthor} options={this.state.SelectAuthorOptions} /> 
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>{t('rating_review')}</Form.Label>
-                    <Form.Control as="select">
-                      <option>1 star</option>
-                      <option>2 star</option>
-                      <option>3 star</option>
-                      <option>4 star</option>
-                      <option>5 star</option>
-                    </Form.Control>
+                    <Select onChange={this.onSelectRatingReview} options={ratingReviewoptions}/> 
                   </Form.Group>
                 </Form>
               </div>
@@ -215,23 +267,24 @@ class Shop extends Component {
                     </Col>
                   ))}
                 </Row>
+
+                <Row>
+                  <Col md={{ span: 6, offset: 3 }}>
+                    <ReactPaginate
+                      breakLabel={'...'}
+                      pageCount={this.state.pageCount}
+                      pageRangeDisplayed={5}
+                      onPageChange={this.handlePageClick}
+                      containerClassName={'pagination'}
+                      activeClassName={'active'}
+                    />
+                  </Col>
+                </Row>
+
               </div>
               ) : (
                 <h4>{t('book.no_book_at_shop')}</h4>
               )}
-
-              <Row>
-                <Col md={{ span: 6, offset: 3 }}>
-                  <ReactPaginate
-                    breakLabel={'...'}
-                    pageCount={this.state.pageCount}
-                    pageRangeDisplayed={5}
-                    onPageChange={this.handlePageClick}
-                    containerClassName={'pagination'}
-                    activeClassName={'active'}
-                  />
-                </Col>
-              </Row>
             </Col>
           </Row>
         </div>
