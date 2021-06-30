@@ -53,5 +53,8 @@ export const en = {
   'book.customer_reviews': 'Customer Reviews',
   'book.write_reviews': 'Write a Review',
   'book.no_book_at_shop': "We don't have any product at the shop",
-  'see_detail': 'See Detail'
+  'see_detail': 'See Detail',
+  'category': 'Category',
+  'author': 'Author',
+  'rating_review': 'Rating Review'
 }

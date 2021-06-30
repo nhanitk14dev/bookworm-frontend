@@ -4,18 +4,8 @@ import { Row, Col, Form, Dropdown, DropdownButton } from 'react-bootstrap';
 import SingleBookCommon from '../common/SingleBookCommon';
 import ReactPaginate from 'react-paginate';
 import Select from 'react-select'
-import { bookService } from '../services';
+import { bookService, categoryService, authorService } from '../services';
 import _ from 'lodash';
-
-const options = [
-  { value: 'a', label: 'Book A' },
-  { value: 'b', label: 'Book B' },
-  { value: 'c', label: 'Book C' }
-]
-
-const FilterComponent = () => (
-  <Select options={options} />
-)
 
 class Shop extends Component {
 
@@ -30,12 +20,47 @@ class Shop extends Component {
       sortByKey: 'sale',
       sortByTitle: 'Sort by on sale',
       perPage: '8',
-      perPageTitle: 'Show 8'
+      perPageTitle: 'Show 8',
+      SelectCategoryOptions: [],
+      SelectAuthorOptions: []
     };
   }
 
   componentDidMount() {
     this.handleGetBooks();
+    this.handleGetCategories();
+    this.handleGetAuthors();
+  }
+
+  handleGetAuthors = () => {
+    authorService.getAuthors()
+      .then(res => {
+        if (res) {
+          const options = [];
+          _.forEach(res.data, function(i) {
+            options.push({ value: i.id, label: i.author_name });
+          });
+          this.setState({
+            SelectAuthorOptions: options
+          });
+        }
+      });
+  }
+
+  handleGetCategories = () => {
+    categoryService.getCategories()
+      .then(res => {
+        if (res) {
+          const options = [];
+          _.forEach(res.data, function(i) {
+            options.push({ value: i.id, label: i.category_name });
+          });
+
+          this.setState({
+            SelectCategoryOptions: options
+          });
+        }
+      });
   }
 
   handleGetBooks = () => {
@@ -121,15 +146,15 @@ class Shop extends Component {
                <h4>Filter By</h4>
                 <Form>
                   <Form.Group>
-                    <Form.Label>Category</Form.Label>
-                    <FilterComponent/>
+                    <Form.Label>{t('category')}</Form.Label>
+                    <Select options={this.state.SelectCategoryOptions} /> 
                   </Form.Group>
                   <Form.Group>
-                    <Form.Label>Author</Form.Label>
-                    <FilterComponent/>
+                    <Form.Label>{t('author')}</Form.Label>
+                    <Select options={this.state.SelectAuthorOptions} /> 
                   </Form.Group>
                   <Form.Group>
-                    <Form.Label>Rating Review</Form.Label>
+                    <Form.Label>{t('rating_review')}</Form.Label>
                     <Form.Control as="select">
                       <option>1 star</option>
                       <option>2 star</option>
