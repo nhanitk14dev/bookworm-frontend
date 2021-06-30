@@ -22,6 +22,9 @@ let API_ENDPOINTS_FUNCTION = {
   },
   endpointBooks: () => {
     return API_BASE_URL + `/api/books`;
+  },
+  endpointReviews: (bookId) => {
+    return API_BASE_URL + `/api/reviews/${bookId}`;
   }
 }
 export const apiEndpointFunction = API_ENDPOINTS_FUNCTION;

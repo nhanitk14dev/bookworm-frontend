@@ -2,23 +2,101 @@ import { Component } from 'react'
 import { Jumbotron, Dropdown, DropdownButton, Row, Col, Pagination } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router'
+import { reviewService } from '../../services';
+import ReactPaginate from 'react-paginate';
 
 class CustomerReviews extends Component {
 
-  renderPagination = () => {
-    return (
-        <Pagination>
-        <Pagination.Prev />
-        <Pagination.Item>{1}</Pagination.Item>
-        <Pagination.Item active>{2}</Pagination.Item>
-        <Pagination.Item>{3}</Pagination.Item>
-        <Pagination.Next />
-      </Pagination>
+  constructor(props) {
+    super(props)
+    this.handlePageClick = this.handlePageClick.bind(this);
+    this.onSelectSort = this.onSelectSort.bind(this);
+    this.onSelectperPage = this.onSelectperPage.bind(this);
+    this.state = {
+      reviews: [],
+      page: 1,
+      pageCount: 0,
+      showingFrom: 0,
+      showingTo: 0,
+      totalReviews: 0,
+      sortByKey: 'newest',
+      sortByTitle: 'Sort by on date',
+      perPage: 10,
+      perPageTitle: 'Show 10',
+    }
+  }
+
+  componentDidMount() {
+    let bookId = this.props.bookId;
+    this.handleGetReviews(bookId);
+  }
+
+  handleGetReviews = () => {
+    const { page } = this.state;
+    const filters = this.getRequestFilters();
+
+    reviewService.getReviews(page, this.props.bookId, filters)
+      .then(res => {
+        if (res) {
+          this.setState({
+            reviews: res.data,
+            pageCount: res.last_page,
+            perPage: res.per_page,
+            showingFrom: res.from ? res.from : 0,
+            showingTo: res.to ? res.to : 0,
+            totalReviews: res.total
+          });
+        }
+      });
+  }
+
+  getRequestFilters() {
+    const { page, sortByKey, perPage } = this.state;
+    let params = {};
+
+    if (page) params["page"] = page;
+    if (sortByKey) params["sortByKey"] = sortByKey;
+    if (perPage) params['perPage'] = perPage;
+
+    return params;
+  }
+
+  handlePageClick(index) {
+    this.setState({
+        page: index.selected + 1
+      },
+      () => {
+        this.handleGetReviews();
+      }
+    );
+  }
+
+  onSelectSort(eventKey, e) {
+    this.setState({
+        sortByKey: eventKey,
+        sortByTitle: e.target.text
+      },
+      () => {
+        this.handleGetReviews();
+      }
+    );
+  }
+
+  onSelectperPage(eventKey, e) {
+    this.setState({
+        page: 1, // reset go to page 1
+        perPage: eventKey,
+        perPageTitle: e.target.text
+      },
+      () => {
+        this.handleGetReviews();
+      }
     );
   }
 
   render() {
     let t = this.context.t
+    const reviews = this.state.reviews;
 
     return (
       <div id="customer-reviews">
@@ -38,70 +116,74 @@ class CustomerReviews extends Component {
             </div>
           </div>
           <div className="toolbar-sort clearfix">
-            <div className="showing-total">Showing 1-12 of 3012 reviews</div>
+            <div className="showing-total">Showing {this.state.showingFrom}-{this.state.showingTo} of {this.state.totalBooks} reviews</div>
             <div className="group-sort">
-              <DropdownButton id="sort-sale" title="Sort by on sale" variant="secondary">
-                <Dropdown.Item href="#/action">Sort by date: newest to oldest</Dropdown.Item>
-                <Dropdown.Item href="#/action">Sort by date: oldest to newest</Dropdown.Item>
+              <DropdownButton id="sort-sale" title="Sort by on date" variant="secondary" onSelect={this.onSelectSort}>
+                <Dropdown.Item eventKey="newest" active={this.state.sortByKey === 'newest' ? 'active' : ''}>
+                  Sort by date: newest to oldest
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="oldest" active={this.state.sortByKey === 'oldest' ? 'active' : ''}>
+                  Sort by date: oldest to newest
+                </Dropdown.Item>
               </DropdownButton>
-              <DropdownButton id="sort-records" title="Show 20" variant="secondary">
-                <Dropdown.Item href="#/action">Show 20</Dropdown.Item>
-                <Dropdown.Item href="#/action">Show 50</Dropdown.Item>
-                <Dropdown.Item href="#/action">Show 100</Dropdown.Item>
+              <DropdownButton id="sort-records" variant="secondary" onSelect={this.onSelectperPage} title={this.state.perPageTitle}>
+                <Dropdown.Item eventKey="5" active={this.state.perPage === '5' ? 'active' : ''}>
+                  Show 5
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="10" active={this.state.perPage === '10' ? 'active' : ''}>
+                  Show 10
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="15" active={this.state.perPage === '15' ? 'active' : ''}>
+                  Show 15
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="20" active={this.state.perPage === '20' ? 'active' : ''}>
+                  Show 10
+                </Dropdown.Item>
               </DropdownButton>
             </div>
           </div>
-          <div className="list-reviews">
-            <div className="rv-item">
-              <p className="clearfix">
-                <span className="rv-title">Amazing Story! You will love it</span>
-                <span className="rv-star">5 stars</span>
-              </p>
-              <p className="rv-content">
-                Review content. The name Bookworm was taken from the original name for New York international Airport,
-                Which was renamed JFK
-              </p>
-              <p className="rv-date">Jun 17, 2021</p>
-            </div>
-            <div className="rv-item">
-              <p className="clearfix">
-                <span className="rv-title">Amazing Story! You will love it</span>
-                <span className="rv-star">5 stars</span>
-              </p>
-              <p className="rv-content">
-                Review content. The name Bookworm was taken from the original name for New York international Airport,
-                Which was renamed JFK
-              </p>
-              <p className="rv-date">Jun 17, 2021</p>
-            </div>
-            <div className="rv-item">
-              <p className="clearfix">
-                <span className="rv-title">Amazing Story! You will love it</span>
-                <span className="rv-star">5 stars</span>
-              </p>
-              <p className="rv-content">
-                Review content. The name Bookworm was taken from the original name for New York international Airport,
-                Which was renamed JFK
-              </p>
-              <p className="rv-date">Jun 17, 2021</p>
-            </div>
-            <div className="rv-item">
-              <p className="clearfix">
-                <span className="rv-title">Amazing Story! You will love it</span>
-                <span className="rv-star">5 stars</span>
-              </p>
-              <p className="rv-content">
-                Review content. The name Bookworm was taken from the original name for New York international Airport,
-                Which was renamed JFK
-              </p>
-              <p className="rv-date">Jun 17, 2021</p>
-            </div>
-            <Row>
-                <Col md={{ span: 6, offset: 3 }}>
-                  {this.renderPagination()}
-                </Col>
+          
+          <div>
+            {reviews.length > 0 ? (
+            <div className="list-reviews">
+              <Row>
+                {reviews.map((item) => (
+                  <div className="rv-item">
+                    <p className="clearfix">
+                      <span className="rv-title">{item.review_title}</span>
+                      <span className="rv-star">{item.rating_star} stars</span>
+                    </p>
+                    <p className="rv-content">
+                      {item.review_detail}
+                    </p>
+                    <p className="rv-date">
+                      {item.review_date}
+                    </p>
+                  </div>
+                ))}
               </Row>
+
+              <Row>
+                  <Col md={{ span: 9, offset: 1 }}>
+                    <ReactPaginate
+                      breakLabel={'...'}
+                      pageCount={this.state.pageCount}
+                      pageRangeDisplayed={5}
+                      onPageChange={this.handlePageClick}
+                      containerClassName={'pagination'}
+                      activeClassName={'active'}
+                    />
+                  </Col>
+              </Row>
+            </div>
+            ) : (
+              <div>
+                <h4>{t('book.no_book_at_shop')}</h4>
+              </div>
+            )}
           </div>
+
+
         </Jumbotron>
       </div>
     );

@@ -49,6 +49,7 @@ class Book extends Component {
             level2={book ? book.book_title : this.state.slug}
             />
           {book && (
+            <div>
             <Row>
               <Col lg={7} md={12}>
                 <div className="book-info">
@@ -103,16 +104,16 @@ class Book extends Component {
                 </div>
               </Col>
             </Row>
+            <Row>
+              <Col lg={7} md={12}>
+                <CustomerReviews bookId={book.id}/>
+              </Col>
+              <Col lg={5} md={12}>
+                <WriteReview bookId={book.id}/>
+              </Col>
+            </Row>
+            </div>
           )}
-
-          <Row>
-            <Col lg={7} md={12}>
-              <CustomerReviews/>
-            </Col>
-            <Col lg={5} md={12}>
-              <WriteReview/>
-            </Col>
-          </Row>
         </div>
       </Fragment>
     );
