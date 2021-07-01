@@ -25,6 +25,9 @@ let API_ENDPOINTS_FUNCTION = {
   },
   endpointReviews: (bookId) => {
     return API_BASE_URL + `/api/reviews/${bookId}`;
-  }
+  },
+  endpointCreateReview: (bookId) => {
+    return API_BASE_URL + `/api/create-reviews/${bookId}`;
+  },
 }
 export const apiEndpointFunction = API_ENDPOINTS_FUNCTION;

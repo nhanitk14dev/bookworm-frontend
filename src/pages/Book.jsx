@@ -14,7 +14,8 @@ class Book extends Component {
     super(props)
     this.state = {
       book: '',
-      slug: ''
+      slug: '',
+      createdNewReview: false
     }
   }
 
@@ -33,6 +34,14 @@ class Book extends Component {
           });
         }
       });
+  }
+
+  handleUpdatedListReviews = (status) => {
+    if (status) {
+      this.setState({
+        createdNewReview: !this.state.createdNewReview
+      });
+    }
   }
 
   render() {
@@ -106,10 +115,13 @@ class Book extends Component {
             </Row>
             <Row>
               <Col lg={7} md={12}>
-                <CustomerReviews bookId={book.id}/>
+                <CustomerReviews bookId={book.id} createdNewReview={this.state.createdNewReview}/>
               </Col>
               <Col lg={5} md={12}>
-                <WriteReview bookId={book.id}/>
+                <WriteReview 
+                bookId={book.id}
+                updatedListReviews={this.handleUpdatedListReviews}
+                />
               </Col>
             </Row>
             </div>

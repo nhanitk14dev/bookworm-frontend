@@ -33,6 +33,13 @@ class CustomerReviews extends Component {
     this.handleGetReviews(bookId);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.createdNewReview !== prevProps.createdNewReview) {
+      // Change state and props from create form, call Api to update list.
+      this.handleGetReviews(this.props.bookId);
+    }
+  }
+
   handleGetReviews = () => {
     const { page } = this.state;
     const filters = this.getRequestFilters();

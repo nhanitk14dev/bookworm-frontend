@@ -2,7 +2,8 @@ import axios from "axios";
 import { apiEndpointFunction } from '../helpers';
 
 export const reviewService = {
-  getReviews
+  getReviews,
+  createReview
 };
 
 function getReviews(page, BookId, filters) {
@@ -21,5 +22,22 @@ function getReviews(page, BookId, filters) {
       }
       return false;
     })
+  );
+}
+
+function createReview(BookId, formData) {
+  return (
+    axios
+    .post(
+      apiEndpointFunction.endpointCreateReview(BookId),
+      formData
+    )
+    .then(res => {
+      if (res.status === 200 && res.data.code == '0000') {
+        return true;
+      } else {
+        return false;
+      }
+    }).catch()
   );
 }
