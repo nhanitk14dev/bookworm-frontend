@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router'
 import { reviewService } from '../../services';
 import ReactPaginate from 'react-paginate';
+import moment from "moment";
 
 class CustomerReviews extends Component {
 
@@ -14,6 +15,7 @@ class CustomerReviews extends Component {
     this.onSelectperPage = this.onSelectperPage.bind(this);
     this.state = {
       reviews: [],
+      metaDataReviews: [],
       page: 1,
       pageCount: 0,
       showingFrom: 0,
@@ -39,12 +41,13 @@ class CustomerReviews extends Component {
       .then(res => {
         if (res) {
           this.setState({
-            reviews: res.data,
-            pageCount: res.last_page,
-            perPage: res.per_page,
-            showingFrom: res.from ? res.from : 0,
-            showingTo: res.to ? res.to : 0,
-            totalReviews: res.total
+            reviews: res.reviews.data,
+            pageCount: res.reviews.last_page,
+            perPage: res.reviews.per_page,
+            showingFrom: res.reviews.from ? res.reviews.from : 0,
+            showingTo: res.reviews.to ? res.reviews.to : 0,
+            totalReviews: res.reviews.total,
+            metaDataReviews: res.metaData
           });
         }
       });
@@ -97,6 +100,7 @@ class CustomerReviews extends Component {
   render() {
     let t = this.context.t
     const reviews = this.state.reviews;
+    const metaDataReviews = this.state.metaDataReviews;
 
     return (
       <div id="customer-reviews">
@@ -105,14 +109,14 @@ class CustomerReviews extends Component {
             <h3 className="title-b">{t('book.customer_reviews')}
             <small> (Filtered by 5 start)</small>
             </h3>
-            <h2>4.6 Star</h2>
+            <h2>{metaDataReviews.avg_rating_star} Star</h2>
             <div className="star-points">
-              <span className="font-weight-bold mr-1">(3,315)</span>
-              <span>5 star (200)</span>
-              <span className="border-right">4 star (100)</span>
-              <span className="border-right">3 star (20)</span>
-              <span className="border-right">2 star (5)</span>
-              <span>1 star (0)</span>
+              <span className="font-weight-bold mr-1">({this.state.totalReviews})</span>
+              <span>5 star ({metaDataReviews.five_star})</span>
+              <span className="border-right">4 star ({metaDataReviews.four_star})</span>
+              <span className="border-right">3 star ({metaDataReviews.three_star})</span>
+              <span className="border-right">2 star ({metaDataReviews.two_star})</span>
+              <span>1 star ({metaDataReviews.one_star})</span>
             </div>
           </div>
           <div className="toolbar-sort clearfix">
@@ -157,7 +161,7 @@ class CustomerReviews extends Component {
                       {item.review_detail}
                     </p>
                     <p className="rv-date">
-                      {item.review_date}
+                      {moment(item.review_date).format("LLL")}
                     </p>
                   </div>
                 ))}

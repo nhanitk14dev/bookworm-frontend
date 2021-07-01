@@ -14,7 +14,10 @@ function getReviews(page, BookId, filters) {
       })
     .then(res => {
       if (res && res.status === 200) {
-        return res.data.reviews;
+        return {
+          reviews: res.data.reviews,
+          metaData: res.data.meta_data
+        };
       }
       return false;
     })
