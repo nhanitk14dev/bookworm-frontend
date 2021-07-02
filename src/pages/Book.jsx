@@ -7,6 +7,9 @@ import InputSpinner from 'react-bootstrap-input-spinner'
 import WriteReview from '../components/Book/WriteReview';
 import CustomerReviews from '../components/Book/CustomerReviews';
 import { bookService } from '../services';
+import { cartActions } from '../actions';
+import { connect } from "react-redux";
+import swal from 'sweetalert';
 
 class Book extends Component {
 
@@ -17,6 +20,7 @@ class Book extends Component {
       slug: '',
       createdNewReview: false
     }
+    this.onClickaddToCart = this.onClickaddToCart.bind(this);
   }
 
   componentDidMount() {
@@ -40,6 +44,28 @@ class Book extends Component {
     if (status) {
       this.setState({
         createdNewReview: !this.state.createdNewReview
+      });
+    }
+  }
+
+  onClickaddToCart = () => {
+    const book = this.state.book;
+    this.props.addToCart(book);
+    this.showModalMessage('success');
+  }
+
+  showModalMessage(msg = '', status = true) {
+    if (status) {
+      swal({
+        text: msg,
+        timer: 3000,
+        icon: "success",
+      });
+    } else {
+      swal({
+        text: msg,
+        timer: 3000,
+        icon: "error",
       });
     }
   }
@@ -105,7 +131,13 @@ class Book extends Component {
                         size="md"
                         variant={'dark'}
                       />
-                      <Button variant="primary" size="lg" block className="mt-3">
+                      <Button 
+                        variant="primary"
+                        size="lg"
+                        block
+                        className="mt-3"
+                        onClick={this.onClickaddToCart}
+                      >
                         Add to cart
                       </Button>
                     </Card.Body>
@@ -130,13 +162,25 @@ class Book extends Component {
       </Fragment>
     );
   }
-
 }
 
 Book.contextTypes = {
   t: PropTypes.func
 }
 
+const mapStatesToProps = (state) => {
+  return {
+    cartItems: state.carts.cartItems
+  }
+}
 
-// withRouter will set match, location and history to Component props whenever route changes
-export default withRouter(Book);
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  addToCart: (item) => {
+    dispatch(cartActions.addCart(item));
+  }
+});
+
+export default connect(
+  mapStatesToProps,
+  mapDispatchToProps
+)(Book);
