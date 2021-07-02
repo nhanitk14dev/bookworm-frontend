@@ -23,22 +23,22 @@ class WriteReview extends Component {
     const form = event.currentTarget;
     event.preventDefault();
     event.stopPropagation();
-
-    let bookId = this.props.bookId;
-    const formData = {
-      review_title: this.state.reviewTitle,
-      review_detail: this.state.reviewDetail,
-      rating_star: this.state.ratingStar
-    }
-
-    reviewService.createReview(this.props.bookId, formData).then(res => {
-      if (res) {
-        this.showModalMessage('Yours review have updated sucessfully!!');
-        this.props.updatedListReviews(true);
-      } else {
-        this.showModalMessage('Somethings wrong. Please try again!', false);
+    if (form.checkValidity()) {
+      let bookId = this.props.bookId;
+      const formData = {
+        review_title: this.state.reviewTitle,
+        review_detail: this.state.reviewDetail,
+        rating_star: this.state.ratingStar
       }
-    });
+      reviewService.createReview(this.props.bookId, formData).then(res => {
+        if (res) {
+          this.showModalMessage('Yours review have updated sucessfully!!');
+          this.props.updatedListReviews(true);
+        } else {
+          this.showModalMessage('Somethings wrong. Please try again!', false);
+        }
+      });
+    }
   };
 
   showModalMessage(msg = '', status = true) {
