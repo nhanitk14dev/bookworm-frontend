@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Row, Col, Card, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router'
 import BreadCrumb from '../common/BreadCrumb';
 import InputSpinner from 'react-bootstrap-input-spinner'
 import WriteReview from '../components/Book/WriteReview';
@@ -10,6 +9,7 @@ import { bookService } from '../services';
 import { cartActions } from '../actions';
 import { connect } from "react-redux";
 import swal from 'sweetalert';
+import { MAX_QTY_ITEM } from "../config/constant";
 
 class Book extends Component {
 
@@ -18,9 +18,11 @@ class Book extends Component {
     this.state = {
       book: '',
       slug: '',
-      createdNewReview: false
+      qty: 1,
+      createdNewReview: false,
     }
-    this.onClickaddToCart = this.onClickaddToCart.bind(this);
+    this.handleUpdateCartQty = this.handleUpdateCartQty.bind(this);
+    this.handleQuantityChange = this.handleQuantityChange.bind(this);
   }
 
   componentDidMount() {
@@ -48,10 +50,30 @@ class Book extends Component {
     }
   }
 
-  onClickaddToCart = () => {
-    const book = this.state.book;
-    this.props.addToCart(book);
-    this.showModalMessage('success');
+  handleQuantityChange = (value) => {
+    this.setState({
+      qty: value
+    })
+  }
+
+  handleUpdateCartQty = () => {
+
+    let { book, qty } = this.state;
+    let { cartItems } = this.props.cartItems;
+    let translate = this.context.t
+
+    // Only allow a maximum of number quantity for each item
+    let isErrorMax = cartItems.find(function(i) {
+      return i.id === book.id && i.qty + qty > MAX_QTY_ITEM;
+    });
+
+    if (isErrorMax) {
+      this.showModalMessage(translate('alert.error_max_qty'), false);
+      console.log(isErrorMax);
+    } else {
+      this.props.updateCartQty(book, qty);
+      this.showModalMessage(translate('alert.add_cart_success'));
+    }
   }
 
   showModalMessage(msg = '', status = true) {
@@ -72,7 +94,7 @@ class Book extends Component {
 
   render() {
     let t = this.context.t
-    const book = this.state.book;
+    const { book, qty } = this.state;
     const apiBaseURL = process.env.REACT_APP_API_BASE_URL;
 
     return (
@@ -119,15 +141,16 @@ class Book extends Component {
                     </Card.Header>
                     <Card.Body>
                       <Card.Text>
-                        Quantity
+                        {t('cart.quantity')}
                       </Card.Text>
                       <InputSpinner
+                        name="qty"
                         type={'real'}
-                        max={10}
+                        max={8}
                         min={1}
                         step={1}
-                        value={1}
-                        onChange={num=>console.log(num)}
+                        value={qty}
+                        onChange={this.handleQuantityChange}
                         size="md"
                         variant={'dark'}
                       />
@@ -136,9 +159,9 @@ class Book extends Component {
                         size="lg"
                         block
                         className="mt-3"
-                        onClick={this.onClickaddToCart}
+                        onClick={this.handleUpdateCartQty}
                       >
-                        Add to cart
+                      {t('button.add_to_cart')}
                       </Button>
                     </Card.Body>
                   </Card>
@@ -170,13 +193,13 @@ Book.contextTypes = {
 
 const mapStatesToProps = (state) => {
   return {
-    cartItems: state.carts.cartItems
+    cartItems: state.carts
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  addToCart: (item) => {
-    dispatch(cartActions.addCart(item));
+  updateCartQty: (book, qty) => {
+    dispatch(cartActions.addOrUpdateCart(book, qty));
   }
 });
 

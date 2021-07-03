@@ -24,7 +24,6 @@ class WriteReview extends Component {
     event.preventDefault();
     event.stopPropagation();
     if (form.checkValidity()) {
-      let bookId = this.props.bookId;
       const formData = {
         review_title: this.state.reviewTitle,
         review_detail: this.state.reviewDetail,

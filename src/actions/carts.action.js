@@ -1,12 +1,15 @@
-import { ADD_CART } from '../config/constant'
+import { ADD_UPDATE_CART } from '../config/constant'
 
 export const cartActions = {
-  addCart
+  addOrUpdateCart
 };
 
-function addCart(payload) {
+function addOrUpdateCart(book, qty = 1) {
   return {
-    type: ADD_CART,
-    payload
-  };
+    type: ADD_UPDATE_CART,
+    payload: {
+      book,
+      qty: qty
+    }
+  }
 }

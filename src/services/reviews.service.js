@@ -33,7 +33,7 @@ function createReview(BookId, formData) {
       formData
     )
     .then(res => {
-      if (res.status === 200 && res.data.code == '0000') {
+      if (res.status === 200 && res.data.code === '0000') {
         return true;
       } else {
         return false;

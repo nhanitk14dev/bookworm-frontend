@@ -1,36 +1,39 @@
-import { ADD_CART } from '../config/constant'
+import {
+  ADD_UPDATE_CART
+} from '../config/constant'
 
 const initialState = {
   cartItems: JSON.parse(localStorage.getItem("cartItems") || "[]"),
 }
 
 export function carts(state = initialState, action) {
+
+  const cartItems = state.cartItems;
+
   switch (action.type) {
-    case ADD_CART:
-      const cartItems = state.cartItems.slice();
-      let checkExisting = false;
-      cartItems.forEach((x) => {
-        if (x._id === action.payload.id) {
-          checkExisting = true;
-          x.count++;
-        }
-      });
-      if (!checkExisting) {
-        let item = {
-          id: action.payload.id,
-          quantity: 1,
-          bookTitle: action.payload.book_title,
-          image: action.payload.book_cover_photo,
-          price: action.payload.book_price
-        }
-        cartItems.push({ ...item, count: 1 });
+    case ADD_UPDATE_CART:
+      let { book, qty } = action.payload;
+
+      let item = {
+        id: book.id,
+        qty: qty,
+        bookTitle: book.book_title,
+        image: book.book_cover_photo,
+        price: book.book_price
       }
+      let itemExisting = cartItems.find(i => i.id === item.id);
+      if (itemExisting) {
+        itemExisting.qty += qty;
+      } else {
+        cartItems.push(item);
+      }
+
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
-      let result = {
+      return {
         ...state,
         cartItems: cartItems
       }
-      return result;
+
     default:
       return state;
   }

@@ -4,9 +4,5 @@ export const PER_PAGE = 5
 
 
 //Cart
-export const ADD_CART = 'ADD_CART';
-export const CART_MAX_ITEMS = 8;
-export const ERROR_MAX_ITEMS = "Please don't add more than 8 books";
-export const CART_UPDATED_SUCCESS = "Your carts updated successfully";
-export const TYPE_SUCCESS = 'success';
-export const TYPE_FAILED = 'failed';
+export const ADD_UPDATE_CART = 'ADD_UPDATE_CART';
+export const MAX_QTY_ITEM = 8;

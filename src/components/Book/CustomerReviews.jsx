@@ -1,5 +1,11 @@
 import { Component } from 'react'
-import { Jumbotron, Dropdown, DropdownButton, Row, Col, Pagination } from 'react-bootstrap';
+import {
+  Jumbotron,
+  Dropdown,
+  DropdownButton,
+  Row,
+  Col
+} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router'
 import { reviewService } from '../../services';

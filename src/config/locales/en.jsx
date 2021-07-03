@@ -40,6 +40,8 @@ export const en = {
   'alert.logout_fail': 'Logout failed.',
   'alert.register_success': 'Welcome!',
   'alert.register_fail': 'Register failed.',
+  'alert.error_max_qty': 'Only allow a maximum of 8 quantity for each item',
+  'alert.add_cart_success': 'Your carts updated successfully',
   'home.title': 'Welcome to Bookworm Online Site',
   'home.desc': 'This is a online Bookworm website, you can search book in various conditions such as author or category',
   'on_sale': 'On Sale',
@@ -56,5 +58,7 @@ export const en = {
   'see_detail': 'See Detail',
   'category': 'Category',
   'author': 'Author',
-  'rating_review': 'Rating Review'
+  'rating_review': 'Rating Review',
+  'cart.quantity': 'Quantity',
+  'button.add_to_cart': 'Add to cart'
 }

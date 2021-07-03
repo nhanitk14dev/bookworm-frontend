@@ -7,7 +7,6 @@ import { NavLink } from 'react-router-dom'
 import logo from '../../assets/images/logo.svg'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { cartActions } from '../../actions';
 
 class Menu extends Component {
 
@@ -28,7 +27,8 @@ class Menu extends Component {
   }
 
   renderLinks() {
-    const { cartItems } = this.props;
+    const { cartItems } = this.props.cartItems;
+    console.log(cartItems)
     let t = this.context.t
     return <Nav className="mr-auto">
       <Navbar.Text className='mr-3'>
@@ -75,7 +75,7 @@ Menu.contextTypes = {
 
 const mapStatesToProps = (state) => {
   return {
-    cartItems: state.carts.cartItems,
+    cartItems: state.carts,
   }
 }
 

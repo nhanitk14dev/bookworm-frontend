@@ -3,7 +3,6 @@ import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import _ from 'lodash';
-import { Link } from 'react-router-dom';
 import { bookService } from '../../services';
 import SingleBookCommon from '../../common/SingleBookCommon';
 
@@ -42,7 +41,6 @@ class OnSale extends Component {
   }
 
   renderCarousel = () => {
-    const apiBaseURL = process.env.REACT_APP_API_BASE_URL;
     const discountBooks = this.state.data;
     let res = [];
     _.map(discountBooks, (item, index) => {
