@@ -4,14 +4,63 @@ import {
   Button,
   Card,
   Row,
-  Col
+  Col,
+  InputGroup
 } from 'react-bootstrap'
 import PropTypes from 'prop-types';
 import BreadCrumb from '../common/BreadCrumb';
 import noImage from '../assets/images/no-image.png';
 import { connect } from 'react-redux'
+import { cartActions } from '../actions';
+import swal from 'sweetalert';
+import { MAX_QTY_ITEM } from "../config/constant";
+import { Link } from 'react-router-dom';
 
 class Cart extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {}
+    this.handleIncreaseQuantity = this.handleIncreaseQuantity.bind(this);
+    this.handleDecreaseQuantity = this.handleDecreaseQuantity.bind(this);
+  }
+
+  handleIncreaseQuantity = (e) => {
+    let bookId = Number(e.target.getAttribute("dataId"));
+    let translate = this.context.t
+    const { cartItems } = this.props.cartItems;
+    let isErrorMax = cartItems.find(function(i) {
+      return i.id === bookId && i.qty + 1 > MAX_QTY_ITEM;
+    });
+
+    if (isErrorMax) {
+      this.showModalMessage(translate('alert.error_max_qty'), false);
+    } else {
+      this.props.increaseQuantity(bookId);
+    }
+  }
+
+  handleDecreaseQuantity = (e) => {
+    let bookId = Number(e.target.getAttribute("dataId"));
+    this.props.decreaseQuantity(bookId);
+  }
+
+
+  showModalMessage(msg = '', status = true) {
+    if (status) {
+      swal({
+        text: msg,
+        timer: 3000,
+        icon: "success",
+      });
+    } else {
+      swal({
+        text: msg,
+        timer: 3000,
+        icon: "error",
+      });
+    }
+  }
 
   renderCartItems = () => {
     let res = [];
@@ -21,17 +70,19 @@ class Cart extends Component {
       let html = (
         <tr>
           <td>
-            <div className="float-left">
+            <div className="group-book-img">
               <img 
               className="img-thumbnail"
               alt={item.book_title} 
               src={apiBaseURL + item.book_cover_photo || noImage} 
               />
-            </div>
-            <div className="float-right">
-              <p>{item.book_title}</p>
-              <div className="clearfix"></div>
-              <p>{item.author_name}</p>
+              <div className="book-title">
+                <Link className="view-details-link" target="_blank" rel="noopener noreferrer" to={`/book/${item.slug}`}>
+                  <p>{item.book_title}</p>
+                </Link>
+                <div className="clearfix"></div>
+                <p>{item.author_name}</p>
+              </div>
             </div>
           </td>
           <td>
@@ -45,8 +96,12 @@ class Cart extends Component {
             <ins>${item.book_price}</ins>
           )}
           </td>
-          <td>{item.qty}</td>
-          <td>
+          <td className="col-quantity">
+            <span className="btn-change-qty" dataId={item.id} onClick={this.handleDecreaseQuantity}>-</span>
+            <span>{item.qty}</span>
+            <span className="btn-change-qty" dataId={item.id} onClick={this.handleIncreaseQuantity}>+</span>
+          </td>
+          <td className="total">
             ${item.discount ? (item.sub_price*item.qty).toFixed(2) : (item.book_price*item.qty).toFixed(2)}
           </td>
         </tr>
@@ -81,8 +136,8 @@ class Cart extends Component {
               <div>
                 <h4>Your cart: {cartItems.length} items</h4>
                 <Row>
-                  <Col lg={8} md={12}>
-                    <Table striped bordered hover size="sm">
+                  <Col lg={9} md={12}>
+                    <Table responsive="sm" bordered hover>
                       <thead>
                         <tr>
                           <th>Product</th>
@@ -96,7 +151,7 @@ class Cart extends Component {
                       </tbody>
                     </Table>
                   </Col>
-                  <Col lg={4} md={12}>
+                  <Col lg={3} md={12}>
                     <Card className="text-center">
                       <Card.Header>Card Totals</Card.Header>
                       <Card.Body>
@@ -131,4 +186,18 @@ const mapStatesToProps = (state) => {
   }
 }
 
-export default connect(mapStatesToProps)(Cart);
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  increaseQuantity: (bookId) => {
+    console.log(bookId)
+    dispatch(cartActions.increaseQuantity(bookId));
+  },
+  decreaseQuantity: (bookId) => {
+    console.log(bookId)
+    dispatch(cartActions.decreaseQuantity(bookId));
+  }
+});
+
+export default connect(
+  mapStatesToProps,
+  mapDispatchToProps
+)(Cart);

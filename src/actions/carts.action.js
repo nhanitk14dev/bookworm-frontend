@@ -1,7 +1,13 @@
-import { ADD_UPDATE_CART } from '../config/constant'
+import {
+  ADD_UPDATE_CART,
+  INCREASE_QUANTITY,
+  DECREASE_QUANTITY
+} from '../config/constant'
 
 export const cartActions = {
-  addOrUpdateCart
+  addOrUpdateCart,
+  increaseQuantity,
+  decreaseQuantity
 };
 
 function addOrUpdateCart(book, qty = 1) {
@@ -11,5 +17,21 @@ function addOrUpdateCart(book, qty = 1) {
       book,
       qty: qty
     }
+  }
+}
+
+function increaseQuantity(payload) {
+
+  return {
+    type: INCREASE_QUANTITY,
+    payload
+  }
+}
+
+function decreaseQuantity(payload) {
+
+  return {
+    type: DECREASE_QUANTITY,
+    payload
   }
 }
