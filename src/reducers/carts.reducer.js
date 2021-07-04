@@ -14,18 +14,12 @@ export function carts(state = initialState, action) {
     case ADD_UPDATE_CART:
       let { book, qty } = action.payload;
 
-      let item = {
-        id: book.id,
-        qty: qty,
-        bookTitle: book.book_title,
-        image: book.book_cover_photo,
-        price: book.book_price
-      }
-      let itemExisting = cartItems.find(i => i.id === item.id);
+      let itemExisting = cartItems.find(i => i.id === book.id);
       if (itemExisting) {
         itemExisting.qty += qty;
       } else {
-        cartItems.push(item);
+        book.qty = qty;
+        cartItems.push(book);
       }
 
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
