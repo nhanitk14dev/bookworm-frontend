@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Header from '../components/Header/Menu'
 import { connect } from 'react-redux'
+import ScrollToTop from "./ScrollToTop";
 
 class Layout extends Component {
   render() {
@@ -9,6 +10,7 @@ class Layout extends Component {
       <Header/>
       <div className='container main-content'>
       {this.props.children}
+      <ScrollToTop/>
       </div>
     </div>
   }

@@ -259,10 +259,9 @@ class Shop extends Component {
               <div className="list-books">
                 <Row>
                   {books.map((item) => (
-                    <Col lg={3} sm={6}>
+                    <Col lg={3} sm={6} key={item.id}>
                       <SingleBookCommon
                         book={item}
-                        key={item.id}
                       />
                     </Col>
                   ))}
