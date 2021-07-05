@@ -38,10 +38,9 @@ class FeaturedBook extends Component {
     let res = [];
     _.map(this.state.data, function(item) {
       let html = (
-        <Col lg={3} sm={6}>
+        <Col lg={3} sm={6} key={item.id}>
             <SingleBookCommon 
               book={item}
-              key={item.id}
             />
         </Col>
       )

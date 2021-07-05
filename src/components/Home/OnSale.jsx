@@ -45,10 +45,9 @@ class OnSale extends Component {
     let res = [];
     _.map(discountBooks, (item, index) => {
       let html = (
-        <div>
+        <div key={item.id}>
           <SingleBookCommon 
             book={item}
-            key={item.id}
           />
         </div>
       );

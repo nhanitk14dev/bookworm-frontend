@@ -17,10 +17,10 @@ export default class Home extends Component {
           <div className="float-right">
             <Button href="/shop">
               View All
-              <i class="fas fa-arrow-right ml-1"></i>
+              <i className="fas fa-arrow-right ml-1"></i>
             </Button>
             </div>
-          <div class="clearfix"></div>
+          <div className="clearfix"></div>
           <OnSale/>
           </Jumbotron>
 

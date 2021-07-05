@@ -165,7 +165,7 @@ class CustomerReviews extends Component {
             <div className="list-reviews">
               <Row>
                 {reviews.map((item) => (
-                  <div className="rv-item">
+                  <div className="rv-item" key={item.id}>
                     <p className="clearfix">
                       <span className="rv-title">{item.review_title}</span>
                       <span className="rv-star">{item.rating_star} stars</span>

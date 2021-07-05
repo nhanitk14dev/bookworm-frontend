@@ -28,7 +28,6 @@ class Menu extends Component {
 
   renderLinks() {
     const { cartItems } = this.props.cartItems;
-    console.log(cartItems)
     let t = this.context.t
     return <Nav className="mr-auto">
       <Navbar.Text className='mr-3'>

@@ -4,8 +4,7 @@ import {
   Button,
   Card,
   Row,
-  Col,
-  InputGroup
+  Col
 } from 'react-bootstrap'
 import PropTypes from 'prop-types';
 import BreadCrumb from '../common/BreadCrumb';
@@ -31,7 +30,7 @@ class Cart extends Component {
   }
 
   handleIncreaseQuantity = (e) => {
-    let bookId = Number(e.target.getAttribute("dataId"));
+    let bookId = Number(e.target.getAttribute("data-id"));
     let translate = this.context.t
     const { cartItems } = this.props.cartItems;
     let isErrorMax = cartItems.find(function(i) {
@@ -46,7 +45,7 @@ class Cart extends Component {
   }
 
   handleDecreaseQuantity = (e) => {
-    let bookId = Number(e.target.getAttribute("dataId"));
+    let bookId = Number(e.target.getAttribute("data-id"));
     this.props.decreaseQuantity(bookId);
   }
 
@@ -72,8 +71,8 @@ class Cart extends Component {
     let { cartItems } = this.props.cartItems;
 
     if (cartItems.length) {
-      debugger;
-      cartItems.map((item) => {
+
+      cartItems.forEach((item) => {
         let i = {
           book_id: item.id,
           quantity: item.qty,
@@ -106,9 +105,9 @@ class Cart extends Component {
     let res = [];
     const apiBaseURL = process.env.REACT_APP_API_BASE_URL;
     const { cartItems } = this.props.cartItems;
-    cartItems.map((item) => {
+    cartItems.forEach((item) => {
       let html = (
-        <tr>
+        <tr key={item.id}>
           <td>
             <div className="group-book-img">
               <img 
@@ -137,9 +136,9 @@ class Cart extends Component {
           )}
           </td>
           <td className="col-quantity">
-            <span className="btn-change-qty" dataId={item.id} onClick={this.handleDecreaseQuantity}>-</span>
+            <span className="btn-change-qty" data-id={item.id} onClick={this.handleDecreaseQuantity}>-</span>
             <span>{item.qty}</span>
-            <span className="btn-change-qty" dataId={item.id} onClick={this.handleIncreaseQuantity}>+</span>
+            <span className="btn-change-qty" data-id={item.id} onClick={this.handleIncreaseQuantity}>+</span>
           </td>
           <td className="total">
             ${item.discount ? (item.sub_price*item.qty).toFixed(2) : (item.book_price*item.qty).toFixed(2)}
@@ -162,7 +161,7 @@ class Cart extends Component {
     let totalCart = 0;
     const { cartItems } = this.props.cartItems;
     if (cartItems.length) {
-      cartItems.map((item) => {
+      cartItems.forEach(item => {
         totalCart += item.discount ? (item.sub_price * item.qty) : (item.book_price * item.qty);
       });
     }
