@@ -12,17 +12,22 @@ import BreadCrumb from '../common/BreadCrumb';
 import noImage from '../assets/images/no-image.png';
 import { connect } from 'react-redux'
 import { cartActions } from '../actions';
+import { orderService } from '../services';
 import swal from 'sweetalert';
 import { MAX_QTY_ITEM } from "../config/constant";
 import { Link } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 
 class Cart extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      redirect: null
+    }
     this.handleIncreaseQuantity = this.handleIncreaseQuantity.bind(this);
     this.handleDecreaseQuantity = this.handleDecreaseQuantity.bind(this);
+    this.handlePlaceOder = this.handlePlaceOder.bind(this);
   }
 
   handleIncreaseQuantity = (e) => {
@@ -45,22 +50,57 @@ class Cart extends Component {
     this.props.decreaseQuantity(bookId);
   }
 
-
   showModalMessage(msg = '', status = true) {
     if (status) {
       swal({
         text: msg,
-        timer: 3000,
+        timer: 5000,
         icon: "success",
       });
     } else {
       swal({
         text: msg,
-        timer: 3000,
+        timer: 5000,
         icon: "error",
       });
     }
   }
+
+  handlePlaceOder = (e) => {
+    e.preventDefault();
+    const data = [];
+    let { cartItems } = this.props.cartItems;
+
+    if (cartItems.length) {
+      debugger;
+      cartItems.map((item) => {
+        let i = {
+          book_id: item.id,
+          quantity: item.qty,
+          price: item.discount ? item.sub_price : item.book_price
+        }
+        data.push(i);
+      })
+
+      orderService.createOrderService(data)
+        .then(res => {
+          if (res) {
+            this.showModalMessage('Yours order have created sucessfully!!');
+            this.props.destroyCart(cartItems);
+
+            const timer = setTimeout(() => {
+              this.setState({
+                redirect: '/'
+              });
+            }, 5000);
+            return () => clearTimeout(timer);
+
+          } else {
+            this.showModalMessage('Somethings wrong. Please try again!', false);
+          }
+        });
+    }
+  };
 
   renderCartItems = () => {
     let res = [];
@@ -113,6 +153,11 @@ class Cart extends Component {
 
 
   render() {
+
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />
+    }
+
     let t = this.context.t
     let totalCart = 0;
     const { cartItems } = this.props.cartItems;
@@ -156,7 +201,7 @@ class Cart extends Component {
                       <Card.Header>Card Totals</Card.Header>
                       <Card.Body>
                         <h3 className="title-b">${totalCart.toFixed(2)}</h3>
-                        <Button variant="primary">Place Order</Button>
+                        <Button variant="primary" onClick={this.handlePlaceOder}>Place Order</Button>
                       </Card.Body>
                     </Card>
                   </Col>
@@ -188,12 +233,13 @@ const mapStatesToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   increaseQuantity: (bookId) => {
-    console.log(bookId)
     dispatch(cartActions.increaseQuantity(bookId));
   },
   decreaseQuantity: (bookId) => {
-    console.log(bookId)
     dispatch(cartActions.decreaseQuantity(bookId));
+  },
+  destroyCart: (cart) => {
+    dispatch(cartActions.destroyCart(cart));
   }
 });
 

@@ -7,7 +7,8 @@ let endpoints = {
   recommended_books: '/api/recommended-books',
   popular_books: '/api/popular-books',
   categories: '/api/categories',
-  authors: '/api/authors'
+  authors: '/api/authors',
+  create_order: '/api/create-order'
 }
 
 let API_ENDPOINTS = {};

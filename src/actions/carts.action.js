@@ -1,13 +1,15 @@
 import {
   ADD_UPDATE_CART,
   INCREASE_QUANTITY,
-  DECREASE_QUANTITY
+  DECREASE_QUANTITY,
+  DESTROY_CART
 } from '../config/constant'
 
 export const cartActions = {
   addOrUpdateCart,
   increaseQuantity,
-  decreaseQuantity
+  decreaseQuantity,
+  destroyCart
 };
 
 function addOrUpdateCart(book, qty = 1) {
@@ -33,5 +35,11 @@ function decreaseQuantity(payload) {
   return {
     type: DECREASE_QUANTITY,
     payload
+  }
+}
+
+function destroyCart() {
+  return {
+    type: DESTROY_CART,
   }
 }

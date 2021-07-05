@@ -60,5 +60,6 @@ export const en = {
   'author': 'Author',
   'rating_review': 'Rating Review',
   'cart.quantity': 'Quantity',
-  'button.add_to_cart': 'Add to cart'
+  'button.add_to_cart': 'Add to cart',
+  'book.no_reviews': "This book don't have any reviews"
 }

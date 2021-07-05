@@ -195,7 +195,7 @@ class CustomerReviews extends Component {
             </div>
             ) : (
               <div>
-                <h4>{t('book.no_book_at_shop')}</h4>
+                <h4>{t('book.no_reviews')}</h4>
               </div>
             )}
           </div>

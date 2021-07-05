@@ -1,7 +1,8 @@
 import {
   ADD_UPDATE_CART,
   INCREASE_QUANTITY,
-  DECREASE_QUANTITY
+  DECREASE_QUANTITY,
+  DESTROY_CART
 } from '../config/constant'
 
 
@@ -59,6 +60,13 @@ export function carts(state = initialState, action) {
 
       return {
         ...state
+      }
+
+    case DESTROY_CART:
+      localStorage.removeItem("cartItems");
+      return {
+        ...state,
+        cartItems: []
       }
     default:
       return state;
