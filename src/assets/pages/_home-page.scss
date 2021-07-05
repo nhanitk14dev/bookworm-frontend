@@ -1,7 +1,55 @@
 .home {
   width: 100%;
+
   .featured-book {
     margin-bottom: 15px;
   }
-}
 
+  .home-onsale {
+    .book-carousel {
+      marin: 0 5px;
+
+      .owl-prev,
+      .owl-next {
+        color: blue;
+      }
+
+      @media (min-width: $tablet-width) {
+        .owl-theme .owl-nav {
+          position: absolute;
+          width: 110%;
+          left: -50px;
+          top: 40%;
+          height: 80px;
+          font-size: 40px;
+
+          button.owl-prev {
+            font-size: 40px;
+            position: absolute;
+            font-weight: 700;
+            left: 0;
+          }
+
+          button.owl-next {
+            font-size: 40px;
+            position: absolute;
+            font-weight: 700;
+            right: 0;
+          }
+        }
+      }
+
+      @media (max-width: $tablet-width) {
+        .single-book .info {
+          height: 120px;
+        }
+
+        .owl-item img {
+          width: 100%;
+          height: 300px;
+        }
+
+      }
+    }
+  }
+}

@@ -69,6 +69,10 @@ class OnSale extends Component {
             autoplay={true}
             responsiveClass={true}
             lazyLoad={true}
+            navText={[
+              '<i class="fas fa-arrow-circle-left"></i>',
+              '<i class="fas fa-arrow-circle-right"></i>'
+            ]}
             responsive={this.state.responsiveCarousel}>
             {this.renderCarousel()}
           </OwlCarousel>

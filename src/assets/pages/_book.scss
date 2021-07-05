@@ -27,7 +27,10 @@
 
   .info {
     padding: 5px 7px;
-    height: 130px;
+
+    @media (min-width: $tablet-width) {
+      height: 130px;
+    }
   }
 
   .book-carousel-price {
@@ -146,6 +149,11 @@
         width: 40%;
         padding: 0;
         text-align: center;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
       }
 
       .content {
