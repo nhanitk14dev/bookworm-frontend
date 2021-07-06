@@ -29,7 +29,7 @@ function createReview(BookId, formData) {
   return (
     axios
     .post(
-      apiEndpointFunction.endpointCreateReview(BookId),
+      apiEndpointFunction.endpointReviews(BookId),
       formData
     )
     .then(res => {

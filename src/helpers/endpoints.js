@@ -3,12 +3,12 @@ import _ from 'lodash';
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 let endpoints = {
-  discount_books: '/api/discount-books',
-  recommended_books: '/api/recommended-books',
-  popular_books: '/api/popular-books',
-  categories: '/api/categories',
-  authors: '/api/authors',
-  create_order: '/api/create-order'
+  discount_books: '/api/v1/books/discounts',
+  recommended_books: '/api/v1/books/recommendation',
+  popular_books: '/api/v1/books/popularity',
+  categories: '/api/v1/categories',
+  authors: '/api/v1/authors',
+  create_order: '/api/v1/orders'
 }
 
 let API_ENDPOINTS = {};
@@ -19,16 +19,13 @@ export const apiEndpoints = API_ENDPOINTS;
 
 let API_ENDPOINTS_FUNCTION = {
   endpointBookBySlug: (slug) => {
-    return API_BASE_URL + `/api/book/${slug}`;
+    return API_BASE_URL + `/api/v1/books/${slug}`;
   },
   endpointBooks: () => {
-    return API_BASE_URL + `/api/books`;
+    return API_BASE_URL + `/api/v1/books`;
   },
   endpointReviews: (bookId) => {
-    return API_BASE_URL + `/api/reviews/${bookId}`;
-  },
-  endpointCreateReview: (bookId) => {
-    return API_BASE_URL + `/api/create-reviews/${bookId}`;
+    return API_BASE_URL + `/api/v1/reviews/${bookId}`;
   },
 }
 export const apiEndpointFunction = API_ENDPOINTS_FUNCTION;
