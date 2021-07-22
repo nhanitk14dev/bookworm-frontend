@@ -1,14 +1,11 @@
 <template>
+  <b-container>
     <div id="app">
-        <b-container>
-            <MenuNavigation 
-            :nav-links="navLinks"
-            />
-        </b-container>
-        <router-view />
+      <MenuNavigation :nav-links="navLinks" />
+      <router-view />
     </div>
+  </b-container>
 </template>
-
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -18,7 +15,6 @@
   color: #2c3e50;
 }
 </style>
-
 <script>
 import MenuNavigation from "@/components/MenuNavigation.vue"
 export default {
