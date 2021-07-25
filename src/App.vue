@@ -1,10 +1,13 @@
 <template>
-  <b-container>
-    <div id="app">
-      <MenuNavigation :nav-links="navLinks" />
+  <div id="app">
+    <header>
+      <MenuNavigation />
+    </header>
+    <b-container>
       <router-view />
-    </div>
-  </b-container>
+    </b-container>
+    <Footer />
+  </div>
 </template>
 <style lang="scss">
 #app {
@@ -16,29 +19,12 @@
 }
 </style>
 <script>
-import MenuNavigation from "@/components/MenuNavigation.vue"
+import MenuNavigation from "@/components/MenuNavigation.vue";
+import Footer from "@/components/Footer.vue";
 export default {
   components: {
-    MenuNavigation
+    MenuNavigation,
+    Footer,
   },
-  data: () => ({
-    navLinks: [{
-        text: 'Home',
-        path: '/'
-      },
-      {
-        text: 'Shop',
-        path: '/shop'
-      },
-      {
-        text: 'About',
-        path: '/about'
-      },
-      {
-        text: 'Cart',
-        path: '/cart'
-      },
-    ]
-  })
-}
+};
 </script>
