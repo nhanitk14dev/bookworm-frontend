@@ -5,7 +5,9 @@
         <h3>On Sale</h3>
       </div>
       <div class="float-right">
-        <button type="button" class="btn btn-primary">View All</button>
+        <router-link to="/shop">
+          <button type="button" class="btn btn-primary">View All</button>
+        </router-link>
       </div>
     </div>
     <div class="clearfix"></div>

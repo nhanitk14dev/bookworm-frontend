@@ -11,6 +11,7 @@ The project build from Vuejs with Vuex, Vue Router
 - Video: https://www.vuemastery.com/courses/intro-to-vue-3/creating-the-vue-app-vue3
 - https://vueschool.io/courses/vuejs-3-fundamentals
 - Webpack: https://cli.vuejs.org/guide/webpack.html
+- Vue Select: https://vue-select.org/guide/install.html#yarn-npm
 ## Install From Vue/Cli
 -------
 - Install with cmd: npm install -g @vue/cli 

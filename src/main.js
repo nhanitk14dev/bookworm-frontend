@@ -8,7 +8,10 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "bootstrap-vue/dist/bootstrap-vue-icons.min.css";
 import "./assets/main.scss";
+import 'vue-select/dist/vue-select.css';
+import vSelect from 'vue-select'
 
+Vue.component('v-select', vSelect)
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 
