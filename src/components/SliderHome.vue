@@ -7,8 +7,13 @@
       :responsive="responsiveCarousel"
       :center="false"
       loop
+      v-if="discountBooks.length > 0"
     >
-      <SingleBookCommon v-for="(item, i) in books" :key="i" />
+    <SingleBookCommon 
+      v-for="book in discountBooks"
+      :key="book.id" 
+      :singleBook="book"
+    />
     </carousel>
   </div>
 </template>
@@ -16,11 +21,14 @@
 <script>
 import SingleBookCommon from "@/components/SingleBookCommon.vue";
 import carousel from "vue-owl-carousel";
+import { mapState, mapActions } from 'vuex'
 export default {
   name: "SliderHome",
+  props: ["singleBook"],
   components: {
     SingleBookCommon,
     carousel,
+    singleBook: {}
   },
   data() {
     return {
@@ -40,17 +48,29 @@ export default {
           items: 4,
         },
       },
-      books: [
-        { title: "Foo", price: 8.4 },
-        { title: "Barx", price: 8.5 },
-        { title: "Bar", price: 8.5 },
-        { title: "Bar", price: 8.5 },
-        { title: "Bar", price: 8.5 },
-        { title: "Bar", price: 8.5 },
-      ],
+      artists: [
+       {name: 'Davido', genre: 'afrobeats', country: 'Nigeria'},
+       {name: 'Burna Boy', genre: 'afrobeats', country: 'Nigeria'},
+       {name: 'AKA', genre: 'hiphop', country: 'South-Africa'},
+       {name: 'Sarkodie', genre: 'hiphop', country: 'Ghana'},
+       {name: 'Stormzy', genre: 'hiphop', country: 'United Kingdom'},
+       {name: 'Lil Nas', genre: 'Country', country: 'United States'},
+       {name: 'Nasty C', genre: 'hiphop', country: 'South-Africa'},
+       {name: 'Shatta-walle', genre: 'Reagae', country: 'Ghana'},
+       {name: 'Khalid', genre: 'pop', country: 'United States'},
+       {name: 'ed-Sheeran', genre: 'pop', country: 'United Kingdom'}
+      ]
     };
   },
-  methods: {},
+  computed: mapState({
+    discountBooks: state => state.bookStore.discountBooks
+  }),
+  created() {
+    // get namespace value via plugin option
+    // and returns Vuex plugin function
+    // store.dispatch(namespace + 'pluginAction')
+    this.$store.dispatch('bookStore/getDiscountBooks');
+  }
 };
 </script>
 <style lang="scss">

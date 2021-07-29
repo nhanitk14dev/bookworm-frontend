@@ -1,11 +1,14 @@
 import Vue from "vue";
 import Vuex from "vuex";
-
+import bookStore from './modules/bookStore'
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    count: 3
+  },
   actions: {},
-  modules: {},
+  modules: {
+    bookStore
+  },
 });
