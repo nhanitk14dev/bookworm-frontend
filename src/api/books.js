@@ -15,4 +15,30 @@ export default {
         // always executed
       });
   },
+  getRecommendedBooks(cb) {
+    axios.get(API_PATH + '/books/recommendation')
+      .then(res => {
+        cb(res.data.recommended_books);
+      })
+      .catch(function(error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function() {
+        // always executed
+      });
+  },
+  getPopularBooks(cb) {
+    axios.get(API_PATH + '/books/popularity')
+      .then(res => {
+        cb(res.data.popular_books);
+      })
+      .catch(function(error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function() {
+        // always executed
+      });
+  },
 }

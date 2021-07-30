@@ -12,6 +12,7 @@ The project build from Vuejs with Vuex, Vue Router
 - https://vueschool.io/courses/vuejs-3-fundamentals
 - Webpack: https://cli.vuejs.org/guide/webpack.html
 - Vue Select: https://vue-select.org/guide/install.html#yarn-npm
+- Reference: https://blog.logrocket.com/how-to-consume-apis-with-vuex-and-axios/
 ## Install From Vue/Cli
 -------
 - Install with cmd: npm install -g @vue/cli 
