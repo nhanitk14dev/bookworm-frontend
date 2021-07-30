@@ -8,7 +8,7 @@
       style="max-width: 20rem"
       class="mb-2"
     >
-      <router-link to="/shop">
+      <router-link :to="`/books/${book.slug}`">
         <b-card-title>{{book.book_title}}</b-card-title>
       </router-link>
       <b-card-text> {{book.author_name}}</b-card-text>
