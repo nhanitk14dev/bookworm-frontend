@@ -20,6 +20,11 @@ The project build from Vuejs with Vuex, Vue Router
 
 ## Project setup
 ```
+Require node version: 14.20.0
+If you have an issue about node version, please install NVM to switch more node version at here https://github.com/coreybutler/nvm-windows
+```
+
+```
 npm install
 ```
 ### Compiles and hot-reloads for development
@@ -37,3 +42,12 @@ npm run lint
 ```
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+###  Connect with backend: Laravel, Nodejs
+```
+Create a file .env at root folder and paste them into file:
+    + VUE_APP_API_BASE_URL = "http://localhost/api/v1"
+    + VUE_APP_BASE_URL = "http://localhost" 
+```
+
+
